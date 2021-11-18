@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Theme12_OrganizationUI", "Theme12_OrganizationUI\Theme12_OrganizationUI.csproj", "{5A19522B-233A-4C1F-887D-942E0F63ECE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A19522B-233A-4C1F-887D-942E0F63ECE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A19522B-233A-4C1F-887D-942E0F63ECE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A19522B-233A-4C1F-887D-942E0F63ECE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A19522B-233A-4C1F-887D-942E0F63ECE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {906BC273-A449-450B-AB25-7B43A386D270}
+	EndGlobalSection
+EndGlobal
