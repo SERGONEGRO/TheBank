@@ -20,9 +20,31 @@ namespace Theme12_OrganizationUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        Organization TheBestCoders;
+
         public MainWindow()
         {
             InitializeComponent();
+            TheBestCoders = new Organization(3);
+
+            cbDepartment.ItemsSource = TheBestCoders.deps;
         }
+
+        private void btnRef(object sender, RoutedEventArgs e)
+        {
+            cbDepartment.Items.Refresh();
+            lvWorkers.Items.Refresh();
+        }
+
+        private void CbDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lvWorkers.ItemsSource = TheBestCoders.deps[cbDepartment.SelectedIndex].employees;
+        }
+
+
+        //private bool find(Worker arg)
+        //{
+        //    return arg.DepartamentId == (cbDepartment.SelectedItem as Department).DepartmentId;
+        //}
     }
 }

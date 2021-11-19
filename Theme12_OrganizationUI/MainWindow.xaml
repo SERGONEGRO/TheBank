@@ -15,9 +15,10 @@
         <ListView x:Name="lvWorkers" Margin="10" Grid.Column="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="FirstName" DisplayMemberBinding="{Binding FirstName}" Width="100"/>
+                    <GridViewColumn Header="LastName" DisplayMemberBinding="{Binding LastName}"/>
                     <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}"/>
-                    <GridViewColumn Header="DepartamentId" DisplayMemberBinding="{Binding DepartamentId}"/>
+                    <GridViewColumn Header="DepId" DisplayMemberBinding="{Binding DepId}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -26,12 +27,12 @@
             <ComboBox x:Name="cbDepartment" Margin="10" SelectionChanged="CbDepartment_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding DepartmentName}"/>
+                        <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBox  Margin="10" 
-                      Text="{Binding ElementName=lvWorkers, Path=SelectedItem.Name}"/>
+                      Text="{Binding ElementName=lvWorkers, Path=SelectedItem.FirstName}"/>
 
             <Button Content="Обновить" Margin="10" Click="btnRef"/>
         </StackPanel>

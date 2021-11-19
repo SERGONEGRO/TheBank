@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.IO;
 
-namespace Theme11_Organization
+namespace Theme12_OrganizationUI
 {
     class Organization
     {
@@ -14,7 +14,7 @@ namespace Theme11_Organization
 
         Random rand = new Random();
         int depsIndex;                     //количество департаментов
-        List<Department> deps = new List<Department>();
+        public List<Department> deps = new List<Department>();
 
         #endregion
 

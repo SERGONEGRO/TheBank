@@ -7,7 +7,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Theme11_Organization
+namespace Theme12_OrganizationUI
 {
     class Department
     {
@@ -28,7 +28,7 @@ namespace Theme11_Organization
         /// <summary>
         /// Название
         /// </summary>
-        private string depName;
+        private string name;
 
         /// <summary>
         /// Дата создания
@@ -67,7 +67,7 @@ namespace Theme11_Organization
         /// <summary>
         /// Название
         /// </summary>
-        public string DepName { get { return this.depName; } set { this.depName = value; } }
+        public string Name { get { return this.name; } set { this.name = value; } }
 
         /// <summary>
         /// id
@@ -95,7 +95,7 @@ namespace Theme11_Organization
             Thread.Sleep(1);   //для разных значений генератора
             Random r = new Random(DateTime.Now.Millisecond);
             this.depId = depNumber;
-            this.depName = $"Department № {depNumber}";
+            this.name = $"Department № {depNumber}";
             this.depCreationDate = new DateTime(2020, 03, (int)depNumber < 30 ? (int)depNumber : 30);
             this.titles = new string[7] { "id", "Имя", "Фамилия", "Возраст", "Департамент", "Зарплата", "Проектов", };
             this.employees = new List<Employee>();
@@ -113,7 +113,7 @@ namespace Theme11_Organization
                         break;
                 }
             }
-            this.depManager = new Manager((uint)depId, "Манагер" + depId, "Фамилия", (byte)r.Next(20, 100), depName, 0);
+            this.depManager = new Manager((uint)depId, "Манагер" + depId, "Фамилия", (byte)r.Next(20, 100), name, 0);
             ManagerSalaryCalculation();
 
             switch (rand.Next(0, 2))   //добавляем в департамент рандомно subDepartment
@@ -141,7 +141,7 @@ namespace Theme11_Organization
         {
             this.subLevel = sl;
             this.depId = (uint)depNumber;
-            this.depName = depName;
+            this.name = depName;
             this.depCreationDate = DateTime.Parse(depDate);
             this.titles = new string[7] { "id", "Имя", "Фамилия", "Возраст", "Департамент", "Зарплата", "Проектов", };
             this.employees = works;
@@ -170,7 +170,7 @@ namespace Theme11_Organization
 
             this.subLevel = sl;
             this.depId = (uint)depNumber;
-            this.depName = depName;
+            this.name = depName;
             this.depCreationDate = DateTime.Parse(depDate);
             this.titles = new string[7] { "id", "Имя", "Фамилия", "Возраст", "Департамент", "Зарплата", "Проектов", };
             this.employees = works;
@@ -235,7 +235,7 @@ namespace Theme11_Organization
                 $"Р_Имя_{iter}",
                 $"Фамилия_{iter}",
                 (byte)age,
-                this.depName,
+                this.name,
                 (byte)pc));
         }
 
@@ -255,7 +255,7 @@ namespace Theme11_Organization
                 $"И_Имя_{iter}",
                 $"Фамилия_{iter}",
                 (byte)age,
-                this.depName,
+                this.name,
                 (byte)pc));
         }
 
@@ -333,7 +333,7 @@ namespace Theme11_Organization
                 {
                     ["SUBLEVEL"] = this.subLevel,
                     ["ID"] = this.DepId,
-                    ["DEPNAME"] = this.DepName,
+                    ["DEPNAME"] = this.Name,
                     ["CREATIONDATE"] = this.CreationDate,
                     ["MANAGER"] = this.depManager.LastName + " " + this.depManager.FirstName,
                     ["WORKERS"] = jArray,
@@ -346,7 +346,7 @@ namespace Theme11_Organization
                 {
                     ["SUBLEVEL"] = this.subLevel,
                     ["ID"] = this.DepId,
-                    ["DEPNAME"] = this.DepName,
+                    ["DEPNAME"] = this.Name,
                     ["CREATIONDATE"] = this.CreationDate,
                     ["MANAGER"] = this.depManager.FirstName + " " + this.depManager.LastName,
                     ["WORKERS"] = jArray
