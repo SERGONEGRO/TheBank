@@ -11,7 +11,7 @@
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="60*"/>
         </Grid.ColumnDefinitions>
-        
+
         <ListView x:Name="lvWorkers" Margin="10" Grid.Column="1">
             <ListView.View>
                 <GridView>
@@ -24,18 +24,55 @@
         </ListView>
 
         <StackPanel>
-            <ComboBox x:Name="cbDepartment" Margin="10" SelectionChanged="CbDepartment_SelectionChanged">
+            <ComboBox x:Name="cbDepartment" Margin="10,10,47,10" SelectionChanged="CbDepartment_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox  Margin="10" 
-                      Text="{Binding ElementName=lvWorkers, Path=SelectedItem.FirstName}"/>
-
-            <Button Content="Обновить" Margin="10" Click="btnRef"/>
+            <TextBox   Text="{Binding SelectedItem.FirstName, ElementName=lvWorkers}" Height="22" Margin="5,0,0,0" AutomationProperties.Name="тектс" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="66">
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.096"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+            </TextBox>
+            <TextBox   Text="{Binding SelectedItem.LastName, ElementName=lvWorkers}" Height="22" Margin="5,0,0,0" AutomationProperties.Name="тектс" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="92">
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-0.004"/>
+                        <RotateTransform Angle="-0.096"/>
+                        <TranslateTransform X="0.001"/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+            </TextBox>
+            <TextBox   Text="{Binding SelectedItem.Age, ElementName=lvWorkers}" Height="22" Margin="82,0,141,0" AutomationProperties.Name="тектс" RenderTransformOrigin="0.5,0.5">
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.096"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+            </TextBox>
+            <Button Content="Обновить" Margin="110,10,93,10" Click="btnRef"/>
+            <TreeView x:Name="tvDepartments" Height="203">
+                <TextBox Text="Organization"/>
+                <TreeViewItem Header="Базы данных">
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </TreeViewItem>
+            </TreeView>
+            <Label Content="Label"/>
         </StackPanel>
+
 
     </Grid>
 </Window>

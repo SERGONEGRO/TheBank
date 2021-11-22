@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Theme12_OrganizationUI
-{
+{//https://www.wpf-tutorial.com/ru/85/элемент-управления-treeview/treeview-привязка-данных-и-несколько-шаблонов/
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
