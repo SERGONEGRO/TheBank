@@ -79,6 +79,8 @@ namespace Theme12_OrganizationUI
         /// </summary>
         public DateTime CreationDate { get { return this.depCreationDate; } set { this.depCreationDate = value; } }
 
+        public Department SubDepartment { get { return this.subDepartment; } set { this.subDepartment = value; } }
+
         #endregion
 
         #region Конструкторы

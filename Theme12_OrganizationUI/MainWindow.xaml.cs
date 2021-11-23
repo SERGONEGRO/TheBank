@@ -26,8 +26,13 @@ namespace Theme12_OrganizationUI
         {
             InitializeComponent();
             TheBestCoders = new Organization(3);
+            //tvDepartments.Items.Add(TheBestCoders);
+            //cbDepartment.ItemsSource = TheBestCoders.deps;
+            foreach (var d in TheBestCoders.deps)
+            {
+                tvDepartments.Items.Add(d);
+            }
 
-            cbDepartment.ItemsSource = TheBestCoders.deps;
         }
 
         private void btnRef(object sender, RoutedEventArgs e)
@@ -39,6 +44,12 @@ namespace Theme12_OrganizationUI
         private void CbDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lvWorkers.ItemsSource = TheBestCoders.deps[cbDepartment.SelectedIndex].employees;
+        }
+
+        private void tvDepartments_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            //lvWorkers.ItemsSource = TheBestCoders.deps[tvDepartments.SelectedItem. ].employees;
+            tbTest.Text = tvDepartments.SelectedValue.ToString();
         }
 
 
