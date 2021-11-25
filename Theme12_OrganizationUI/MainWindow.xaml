@@ -11,19 +11,9 @@
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="60*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lvWorkers" Grid.Column="1" HorizontalAlignment="Left" Margin="10,98,0,127" Width="455">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="FirstName" DisplayMemberBinding="{Binding FirstName}" Width="100"/>
-                    <GridViewColumn Header="LastName" DisplayMemberBinding="{Binding LastName}"/>
-                    <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}"/>
-                    <GridViewColumn Header="DepId" DisplayMemberBinding="{Binding DepId}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TreeView x:Name="tvDepartments"  Margin="0,37,0,10" SelectedItemChanged="tvDepartments_SelectedItemChanged">
+        <TreeView x:Name="tvDepartments" Margin="0,37,0,10" SelectedItemChanged="tvDepartments_SelectedItemChanged">
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding SubDepartment}">
+                <HierarchicalDataTemplate ItemsSource="{Binding deps}">
                     <TextBlock Text="{Binding Name}"/>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
@@ -40,6 +30,13 @@
         <TextBox   Text="{Binding SelectedItem.LastName, ElementName=lvWorkers}" Margin="131,315,0,72" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="109" Grid.Column="1"/>
         <Button Content="Обновить" Margin="131,358,180,25" Click="btnRef" Grid.Column="1"/>
         <TextBox x:Name="tbTest" HorizontalAlignment="Left" Height="62" Margin="83,18,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="332" Grid.Column="1"/>
+        <DataGrid x:Name="dgEmployees" AutoGenerateColumns="False" ItemsSource="{Binding SelectedItem.employees, ElementName=tvDepartments}" Grid.Column="1" HorizontalAlignment="Left" Height="196" Margin="27,98,0,0" VerticalAlignment="Top" Width="418">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Фамилия}"/>
+                <DataGridTextColumn Header="Возраст" Binding="{Binding Age}"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

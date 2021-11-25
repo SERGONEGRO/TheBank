@@ -25,25 +25,21 @@ namespace Theme12_OrganizationUI
         public MainWindow()
         {
             InitializeComponent();
-            TheBestCoders = new Organization(3);
-            //tvDepartments.Items.Add(TheBestCoders);
-            //cbDepartment.ItemsSource = TheBestCoders.deps;
-            foreach (var d in TheBestCoders.deps)
-            {
-                tvDepartments.Items.Add(d);
-            }
-
+            TheBestCoders = new Organization(5);  
+            tvDepartments.ItemsSource = TheBestCoders.deps;
         }
 
         private void btnRef(object sender, RoutedEventArgs e)
         {
             cbDepartment.Items.Refresh();
-            lvWorkers.Items.Refresh();
+            tvDepartments.Items.Refresh();
+            //lvWorkers.Items.Refresh();
         }
 
         private void CbDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            lvWorkers.ItemsSource = TheBestCoders.deps[cbDepartment.SelectedIndex].employees;
+            //lvWorkers.ItemsSource = TheBestCoders.deps[cbDepartment.SelectedIndex].employees;
+            //dgEmployees.ItemsSource = TheBestCoders.deps[tvDepartments.].employees;
         }
 
         private void tvDepartments_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
