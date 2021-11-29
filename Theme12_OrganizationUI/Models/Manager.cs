@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Theme12_OrganizationUI
+namespace Theme12_OrganizationUI.Models
 {
 
     class Manager : Employee

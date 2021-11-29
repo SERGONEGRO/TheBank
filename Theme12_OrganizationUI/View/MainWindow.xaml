@@ -1,9 +1,9 @@
-﻿<Window x:Class="Theme12_OrganizationUI.MainWindow"
+﻿<Window x:Class="Theme12_OrganizationUI.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Theme12_OrganizationUI"
+        xmlns:local="clr-namespace:Theme12_OrganizationUI.View"
         mc:Ignorable="d"
         Title="Organization_UI" Height="450" Width="800">
     <Grid>
@@ -11,21 +11,17 @@
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="60*"/>
         </Grid.ColumnDefinitions>
-        <TreeView x:Name="tvDepartments" Margin="0,37,0,10" SelectedItemChanged="tvDepartments_SelectedItemChanged">
+        
+        <TreeView x:Name="tvDepartments">
+            
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding deps}">
+                <HierarchicalDataTemplate ItemsSource="{Binding employees}">
                     <TextBlock Text="{Binding Name}"/>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
+            
         </TreeView>
 
-        <ComboBox x:Name="cbDepartment" SelectionChanged="CbDepartment_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Left" Width="184" Margin="10,10,0,0">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
         <TextBox   Text="{Binding SelectedItem.FirstName, ElementName=lvWorkers}" Margin="27,315,0,71" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="84" Grid.Column="1"/>
         <TextBox   Text="{Binding SelectedItem.LastName, ElementName=lvWorkers}" Margin="131,315,0,72" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="109" Grid.Column="1"/>
         <Button Content="Обновить" Margin="131,358,180,25" Click="btnRef" Grid.Column="1"/>

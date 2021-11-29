@@ -7,7 +7,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Theme12_OrganizationUI
+namespace Theme12_OrganizationUI.Models
 {
     class Department
     {

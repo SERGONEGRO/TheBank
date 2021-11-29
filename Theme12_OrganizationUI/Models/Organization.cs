@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.IO;
 
-namespace Theme12_OrganizationUI
+namespace Theme12_OrganizationUI.Models
 {
     class Organization
     {

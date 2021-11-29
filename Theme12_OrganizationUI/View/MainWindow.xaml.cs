@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Theme12_OrganizationUI
+namespace Theme12_OrganizationUI.View
 {//https://www.wpf-tutorial.com/ru/85/элемент-управления-treeview/treeview-привязка-данных-и-несколько-шаблонов/
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -25,33 +25,33 @@ namespace Theme12_OrganizationUI
         public MainWindow()
         {
             InitializeComponent();
-            TheBestCoders = new Organization(5);  
+            TheBestCoders = new Organization(5);
+            List<Department> org = new List<Department>()
+            {
+                new Department(1,5,0),
+                new Department(2,5,0)
+
+            };
+
             tvDepartments.ItemsSource = TheBestCoders.deps;
+            
+
+            // tvDepartments.I
         }
 
         private void btnRef(object sender, RoutedEventArgs e)
         {
-            cbDepartment.Items.Refresh();
-            tvDepartments.Items.Refresh();
-            //lvWorkers.Items.Refresh();
-        }
-
-        private void CbDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //lvWorkers.ItemsSource = TheBestCoders.deps[cbDepartment.SelectedIndex].employees;
-            //dgEmployees.ItemsSource = TheBestCoders.deps[tvDepartments.].employees;
+            //cbDepartment.Items.Refresh();
+            //tvDepartments.Items.Refresh();
+            ////lvWorkers.Items.Refresh();
         }
 
         private void tvDepartments_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             //lvWorkers.ItemsSource = TheBestCoders.deps[tvDepartments.SelectedItem. ].employees;
-            tbTest.Text = tvDepartments.SelectedValue.ToString();
+            tbTest.Text = tvDepartments.SelectedItem.ToString();
         }
 
-
-        //private bool find(Worker arg)
-        //{
-        //    return arg.DepartamentId == (cbDepartment.SelectedItem as Department).DepartmentId;
-        //}
+      
     }
 }
