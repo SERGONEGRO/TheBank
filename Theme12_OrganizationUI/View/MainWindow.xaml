@@ -7,32 +7,57 @@
         mc:Ignorable="d"
         Title="Organization_UI" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="60*"/>
-        </Grid.ColumnDefinitions>
-        
-        <TreeView x:Name="tvDepartments">
-            
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding employees}">
-                    <TextBlock Text="{Binding Name}"/>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-            
-        </TreeView>
-
-        <TextBox   Text="{Binding SelectedItem.FirstName, ElementName=lvWorkers}" Margin="27,315,0,71" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="84" Grid.Column="1"/>
-        <TextBox   Text="{Binding SelectedItem.LastName, ElementName=lvWorkers}" Margin="131,315,0,72" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="109" Grid.Column="1"/>
-        <Button Content="Обновить" Margin="131,358,180,25" Click="btnRef" Grid.Column="1"/>
-        <TextBox x:Name="tbTest" HorizontalAlignment="Left" Height="62" Margin="83,18,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="332" Grid.Column="1"/>
-        <DataGrid x:Name="dgEmployees" AutoGenerateColumns="False" ItemsSource="{Binding SelectedItem.employees, ElementName=tvDepartments}" Grid.Column="1" HorizontalAlignment="Left" Height="196" Margin="27,98,0,0" VerticalAlignment="Top" Width="418">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding Фамилия}"/>
-                <DataGridTextColumn Header="Возраст" Binding="{Binding Age}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0">
+            <TabItem Name="UsersTab">
+                <TabItem.Header>
+                    <TextBlock Text="Staff"/>
+                </TabItem.Header>
+                <ListView>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name"/>
+                            <GridViewColumn Header="SurName"/>
+                            <GridViewColumn Header="Position"/>
+                            <GridViewColumn Header="Age"/>
+                            <GridViewColumn Header="Salary"/>
+                            <GridViewColumn Header="Department"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Name="PositionTab">
+                <TabItem.Header>
+                    <TextBlock Text="Position"/>
+                </TabItem.Header>
+                <ListView>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name"/>
+                            <GridViewColumn Header="Salary"/>
+                            <GridViewColumn Header="Count of staffs"/>
+                            <GridViewColumn Header="Max number"/>
+                            <GridViewColumn Header="Department"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Name="DepartmentsTab">
+                <TabItem.Header>
+                    <TextBlock Text="Departments"/>
+                </TabItem.Header>
+                <ListView>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name"/>
+                            <GridViewColumn Header="Count of positions"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
