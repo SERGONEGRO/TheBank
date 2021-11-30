@@ -57,41 +57,41 @@ namespace Theme12_OrganizationUI.Models
         /// Возвращает зарплатные ведомости на всех сотрудников
         /// </summary>
         /// <returns></returns>
-        internal static ObservableCollection<Payroll> GetPayrolls()
-        {
-            //обращаемся к бд
-            using (ApplicationContext db = new ApplicationContext())
-            {
+        //internal static ObservableCollection<Payroll> GetPayrolls()
+        //{
+        //    //обращаемся к бд
+        //    using (ApplicationContext db = new ApplicationContext())
+        //    {
 
-                ObservableCollection<Payroll> payrolls = new ObservableCollection<Payroll>();
+        //        ObservableCollection<Payroll> payrolls = new ObservableCollection<Payroll>();
 
-                foreach (var item in db.DepartmentsTree[0].GetEmployees())
-                {
-                    payrolls.Add(new Payroll(item.PersonnelNumber, item.Surname, item.Name, item.MiddleName, item.DepartmentName,
-                        item.Cathegory.ToString(), item.Position, item.GetWage()));
-                }
+        //        foreach (var item in db.DepartmentsTree[0].GetEmployees())
+        //        {
+        //            payrolls.Add(new Payroll(item.PersonnelNumber, item.Surname, item.Name, item.MiddleName, item.DepartmentName,
+        //                item.Cathegory.ToString(), item.Position, item.GetWage()));
+        //        }
 
-                return payrolls;
-            }
-        }
+        //        return payrolls;
+        //    }
+        //}
 
         /// <summary>
         /// Возвращает коллекцию всего персонала (сотрудников с почасовой оплатой)
         /// </summary>
         /// <returns></returns>
-        internal static ObservableCollection<EditableStaff> GetStaffs()
-        {
-            ObservableCollection<EditableStaff> staffs = new ObservableCollection<EditableStaff>();
+        //internal static ObservableCollection<EditableStaff> GetStaffs()
+        //{
+        //    ObservableCollection<EditableStaff> staffs = new ObservableCollection<EditableStaff>();
 
-            foreach (var item in GetEmployees())
-            {
-                if (item.Cathegory == Cathegory.Персонал)
-                {
-                    staffs.Add(new EditableStaff(item.Surname, item.Name, item.MiddleName, item.DepartmentName, item.Position, item.Hours, item.PersonnelNumber));
-                }
-            }
-            return staffs;
-        }
+        //    foreach (var item in GetEmployees())
+        //    {
+        //        if (item.Cathegory == Cathegory.Персонал)
+        //        {
+        //            staffs.Add(new EditableStaff(item.Surname, item.Name, item.MiddleName, item.DepartmentName, item.Position, item.Hours, item.PersonnelNumber));
+        //        }
+        //    }
+        //    return staffs;
+        //}
 
         /// <summary>
         /// Возвращает запрошенный департамент (находит по имени)
@@ -127,10 +127,10 @@ namespace Theme12_OrganizationUI.Models
                 {
                     //сортируем его по табельному номеру
                     var sortedEmployees = from u in employees
-                                          orderby u.PersonnelNumber
+                                          orderby u.Id
                                           select u;
                     //возвращаем последний номер +1
-                    return sortedEmployees.Last().PersonnelNumber + 1;
+                    return sortedEmployees.Last().Id + 1;
                 }
             }
         }
@@ -251,7 +251,7 @@ namespace Theme12_OrganizationUI.Models
             using (ApplicationContext db = new ApplicationContext())
             {
                 //находим сотрудника
-                Employee employee = db.DepartmentsTree[0].GetEmployee(newEmployee.PersonnelNumber);
+                Employee employee = db.DepartmentsTree[0].GetEmployee(newEmployee.Id);
                 //меняем его на отредактированного
                 employee = newEmployee;
                 //сохраняем БД
@@ -305,7 +305,7 @@ namespace Theme12_OrganizationUI.Models
                 //находим родительский департамент
                 Department parent = db.DepartmentsTree[0].GetDepartment(newEmployee.DepartmentName);
                 //назначаем сотруднику персональный номер
-                newEmployee.PersonnelNumber = GetFreeNumber();
+                newEmployee.Id = GetFreeNumber();
                 //добавляем в него сотрудника
                 parent.AddEmployee(newEmployee);
                 //сохраняем БД

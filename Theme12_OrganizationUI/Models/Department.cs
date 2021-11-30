@@ -1,397 +1,286 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Theme12_OrganizationUI.Models
 {
-    class Department
+    /// <summary>
+    /// Департамент
+    /// </summary>
+    public class Department
     {
-        #region Поля
-
-        Department subDepartment;
-
+        #region КОНСТРУКТОРЫ
         /// <summary>
-        /// уровень вложенности
+        /// Дефолтный конструктор
         /// </summary>
-        int subLevel;
-
-        /// <summary>
-        /// номер Департамента
-        /// </summary>
-        uint depId;
-
-        /// <summary>
-        /// Название
-        /// </summary>
-        private string name;
-
-        /// <summary>
-        /// Дата создания
-        /// </summary>
-        private DateTime depCreationDate;
-
-        ///// <summary>
-        ///// Количество сотрудников в департаменте
-        ///// </summary>
-        //private uint workersCount;
-
-        /// <summary>
-        /// Массив с работниками
-        /// </summary>
-        public List<Employee> employees;
-
-        ///// <summary>
-        ///// Массив с интернами
-        ///// </summary>
-        //public List<Intern> interns;
-
-        /// <summary>
-        /// Заголовки
-        /// </summary>
-        string[] titles;
-
-        /// <summary>
-        /// Менеджер, закрепленный за департаментом
-        /// </summary>
-        public Manager depManager;
-
-        #endregion
-
-        #region Свойства
-
-        /// <summary>
-        /// Название
-        /// </summary>
-        public string Name { get { return this.name; } set { this.name = value; } }
-
-        /// <summary>
-        /// id
-        /// </summary>
-        public uint DepId { get { return this.depId; } set { this.depId = value; } }
-
-        /// <summary>
-        /// Дата создания
-        /// </summary>
-        public DateTime CreationDate { get { return this.depCreationDate; } set { this.depCreationDate = value; } }
-
-        public Department SubDepartment { get { return this.subDepartment; } set { this.subDepartment = value; } }
-
-        #endregion
-
-        #region Конструкторы
-
-        /// <summary>
-        /// Конструктор Основной
-        /// </summary>
-        /// <param name="depNumber">Номер департамента</param>
-        /// <param name="empCount">Кол-во работников</param>
-        /// <param name="sl">Sub Level - степень вложенности</param>
-        public Department(uint depNumber, int empCount, int sl)
+        public Department()
         {
-            this.subLevel = sl;
-            Thread.Sleep(1);   //для разных значений генератора
-            Random r = new Random(DateTime.Now.Millisecond);
-            this.depId = depNumber;
-            this.name = $"Department № {depNumber}";
-            this.depCreationDate = new DateTime(2020, 03, (int)depNumber < 30 ? (int)depNumber : 30);
-            this.titles = new string[7] { "id", "Имя", "Фамилия", "Возраст", "Департамент", "Зарплата", "Проектов", };
-            this.employees = new List<Employee>();
-            Random rand = new Random();
-
-            for (int i = 1; i <= empCount; i++)
-            {
-                switch (rand.Next(0, 2))   //добавляем в департамент рандомно работяг и интернов
-                {
-                    case 0:
-                        AddWorker(i, depNumber, r.Next(20, 100), r.Next(1, 5));
-                        break;
-                    case 1:
-                        AddIntern(i, depNumber, r.Next(20, 100), r.Next(1, 5));
-                        break;
-                }
-            }
-            this.depManager = new Manager((uint)depId, "Манагер" + depId, "Фамилия", (byte)r.Next(20, 100), name, 0);
-            ManagerSalaryCalculation();
-
-            switch (rand.Next(0, 2))   //добавляем в департамент рандомно subDepartment
-            {
-                case 0:
-                    subDepartment = new Department(depId * 10, rand.Next(5, 8), this.subLevel + 1);
-                    break;
-                case 1:
-                    break;
-            }
+            Departments = new ObservableCollection<Department>();
+            Employees = new ObservableCollection<Employee>();
         }
 
-
         /// <summary>
-        /// Конструктор, собирающий департамент C ВЛОженным департаментом, используется для импорта из XML и JSON
+        /// Кастомный конструктор для создания корневого департамента (без родителя)
         /// </summary>
-        /// <param name="sl">Степень вложенности</param>
-        /// <param name="depNumber">номер</param>
-        /// <param name="depName">Название</param>
-        /// <param name="depDate">Дата создания</param>
-        /// <param name="mngr">ФИО Менеджера</param>
-        /// <param name="works">Строка с работягами</param>
-        /// <param name="sb">Строка с сабдепартментом</param>
-        public Department(int sl, int depNumber, string depName, string depDate, string mngr, List<Employee> works, string sb)
+        public Department(string name)
         {
-            this.subLevel = sl;
-            this.depId = (uint)depNumber;
-            this.name = depName;
-            this.depCreationDate = DateTime.Parse(depDate);
-            this.titles = new string[7] { "id", "Имя", "Фамилия", "Возраст", "Департамент", "Зарплата", "Проектов", };
-            this.employees = works;
-            if (sb != null)
-                this.subDepartment = AddDepartment(sb);
-
-            depManager = new Manager();
-            string[] name = mngr.Split(' ');
-            this.depManager.LastName = name[1];
-            this.depManager.FirstName = name[0];
-            ManagerSalaryCalculation();
+            Name = name;
+            Departments = new ObservableCollection<Department>();
+            Employees = new ObservableCollection<Employee>();
         }
-
-
         /// <summary>
-        /// Конструктор, собирающий департамент БЕЗ вложенного департамента, используется для импорта из XML и JSON
+        /// Кастомный конструктор для создания обычного департамента (всегда имеет родителя)
         /// </summary>
-        /// <param name="sl">Степень вложенности</param>
-        /// <param name="depNumber">номер</param>
-        /// <param name="depName">Название</param>
-        /// <param name="depDate">Дата создания</param>
-        /// <param name="mngr">ФИО Менеджера</param>
-        /// <param name="works">Строка с работягами</param>
-        public Department(int sl, int depNumber, string depName, string depDate, string mngr, List<Employee> works)
+        public Department(string name, string parentName)
         {
-
-            this.subLevel = sl;
-            this.depId = (uint)depNumber;
-            this.name = depName;
-            this.depCreationDate = DateTime.Parse(depDate);
-            this.titles = new string[7] { "id", "Имя", "Фамилия", "Возраст", "Департамент", "Зарплата", "Проектов", };
-            this.employees = works;
-
-            depManager = new Manager();
-            string[] name = mngr.Split(' ');
-            this.depManager.LastName = name[1];
-            this.depManager.FirstName = name[0];
-            ManagerSalaryCalculation();
+            Name = name;
+            ParentName = parentName;
+            Departments = new ObservableCollection<Department>();
+            Employees = new ObservableCollection<Employee>();
         }
 
         #endregion
 
-        #region Методы
+        #region СВОЙСТВА
+        /// <summary>
+        /// Наименование департамента
+        /// </summary>
+        public string Name { get; set; }
 
         /// <summary>
-        /// Добавляет Департамент. Если есть Сабдепартамент, то вызывает рекурсивно конструктор
+        /// Родительский департамент
         /// </summary>
-        /// <param name="s">Строка, которую нужно распарсить</param>
+        public string ParentName { get; set; }
+
+        /// <summary>
+        /// Дочерние департаменты
+        /// </summary>
+        public ObservableCollection<Department> Departments { get; set; }
+
+        /// <summary>
+        /// Сотрудники
+        /// </summary>
+        public ObservableCollection<Employee> Employees { get; set; }
+        #endregion
+
+        #region МЕТОДЫ 
+        /// <summary>
+        /// Проверяет, есть ли в департаменте дочерние департаменты и/или сотрудники
+        /// </summary>
         /// <returns></returns>
-        static public Department AddDepartment(string s)
+        internal bool HasChildren()
         {
-            var item = JObject.Parse(s);
-            Department dep;
-            if (item["SUBDEPARTMENT"] != null)
-            {       ///в зависимости от наличия сабдепартмента вызываются разные конструкторы
-                dep = new Department(Convert.ToUInt16(item["SUBLEVEL"]),
-                                                     Convert.ToInt32(item["ID"]),
-                                                     item["DEPNAME"].ToString(),
-                                                     item["CREATIONDATE"].ToString(),
-                                                     item["MANAGER"].ToString(),
-                                                     GetEmployeeJSON(item.ToString()),
-                                                     item["SUBDEPARTMENT"].ToString());
+            if (Departments.Count > 0 || Employees.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        #region МЕТОДЫ ДЛЯ РАБОТЫ С ДЕПАРТАМЕНТАМИ
+        /// <summary>
+        /// Возвращает список всех департаментов-потомков и текущего
+        /// </summary>
+        /// <returns></returns>
+        internal List<Department> GetDepartments()
+        {
+            //создаем новый список
+            List<Department> list = new List<Department>();
+            //пробегаемся по всем дочерним департаментам
+            foreach (var item in Departments)
+            {
+                //собираем из них дочерние департаменты и добавляем их в созданный список
+                list.AddRange(item.GetDepartments());
+            }
+            //добавляем в список сам департамент
+            list.Add(this);
+            //возвращаем список
+            return list;
+        }
+
+        /// <summary>
+        /// Ищет департамент среди наследников и возвращает его
+        /// </summary>
+        /// <param name="departmentName"></param>
+        /// <returns></returns>
+        internal Department GetDepartment(string departmentName)
+        {
+            //сначала, проверяем сам департамент
+            if (Name == departmentName)
+            {
+                return this;
             }
             else
             {
-                dep = new Department(Convert.ToUInt16(item["SUBLEVEL"]),
-                                                     Convert.ToInt32(item["ID"]),
-                                                     item["DEPNAME"].ToString(),
-                                                     item["CREATIONDATE"].ToString(),
-                                                     item["MANAGER"].ToString(),
-                                                     GetEmployeeJSON(item.ToString()));
-
-            }
-
-            return dep;
-        }
-
-
-        /// <summary>
-        /// Добавить Работягу
-        /// </summary>
-        /// <param name="iter">номер работяги</param>
-        /// <param name="depnum">номер департмента</param>
-        /// <param name="age">возраст</param>
-        /// <param name="pc">количество проектов</param>
-        public void AddWorker(int iter, uint depnum, int age, int pc)
-        {
-            employees.Add(
-                new Worker(
-                (uint)(depnum * 1000 + iter),
-                $"Р_Имя_{iter}",
-                $"Фамилия_{iter}",
-                (byte)age,
-                this.name,
-                (byte)pc));
-        }
-
-
-        /// <summary>
-        /// Добавить Интерна
-        /// </summary>
-        /// <param name="iter">номер интерна</param>
-        /// <param name="depnum">номер департмента</param>
-        /// <param name="age">возраст</param>
-        /// <param name="pc">количество проектов</param>
-        public void AddIntern(int iter, uint depnum, int age, int pc)
-        {
-            employees.Add(
-                new Intern(
-                (uint)(depnum * 1000 + iter),
-                $"И_Имя_{iter}",
-                $"Фамилия_{iter}",
-                (byte)age,
-                this.name,
-                (byte)pc));
-        }
-
-
-        /// <summary>
-        /// Печать в консоль
-        /// </summary>
-        public void PrintDepToConsole()
-        {
-            string addSpace = new string(' ', this.subLevel * 5);  //вставляем пробелы, кол-во = уровню вложенности*5
-            Console.WriteLine($"\n{addSpace}Департамент № {depId}, Дата создания: {depCreationDate.ToShortDateString()}, SubLevel: {this.subLevel}");
-            Console.WriteLine($"{addSpace}Менеджер: {this.depManager.LastName} {this.depManager.FirstName}, зарплата: {this.depManager.Salary}");
-            Console.WriteLine($"{addSpace}{titles[0],3} {titles[1],10} {titles[2],20} {titles[3],10} {titles[4],15}  {titles[5],15} {titles[6],10}");
-            foreach (var item in employees)
-            {
-                Console.WriteLine($"{addSpace}{item.Print()}");
-            }
-            if (this.subDepartment != null)
-            {
-                this.subDepartment.PrintDepToConsole();
-            }
-        }
-
-
-        /// <summary>
-        /// Вычисление зарплаты менеджера департамента
-        /// </summary>
-        /// <returns>Зарплата менеджера</returns>
-        public void ManagerSalaryCalculation()
-        {
-            double managerSalary = 0;
-            foreach (var e in this.employees)
-            {
-                managerSalary += e.Salary;
-            }
-
-            managerSalary = managerSalary * 0.15;
-            this.depManager.Salary = (uint)(managerSalary) >= 1300 ? managerSalary : 1300;
-        }
-
-
-        /// <summary>
-        /// Подсчёт количества проектов менеджера
-        /// </summary>
-        /// <returns>Кол-во проектов</returns>
-        public byte ManagerProjectsCountCalculation()
-        {
-            byte managerProjectsCount = 0;
-            foreach (var e in this.employees)
-            {
-                managerProjectsCount = (byte)(managerProjectsCount + e.ProjectsCount);
-            }
-            return managerProjectsCount;
-        }
-
-
-        /// <summary>
-        /// Департмент в Json
-        /// </summary>
-        /// <returns>объект JObject</returns>
-        public JObject SerializeDepartmentToJson()
-        {
-            JArray jArray = new JArray();
-            foreach (var w in this.employees)
-            {
-                JObject obj = w.SerializeEmployeeToJson();
-
-                jArray.Add(obj);
-            }
-
-            JObject jDep;
-            if (this.subDepartment != null)  //если есть вложенный департмент
-            {
-                jDep = new JObject
+                foreach (var item in Departments)
                 {
-                    ["SUBLEVEL"] = this.subLevel,
-                    ["ID"] = this.DepId,
-                    ["DEPNAME"] = this.Name,
-                    ["CREATIONDATE"] = this.CreationDate,
-                    ["MANAGER"] = this.depManager.LastName + " " + this.depManager.FirstName,
-                    ["WORKERS"] = jArray,
-                    ["SUBDEPARTMENT"] = this.subDepartment.SerializeDepartmentToJson()
-                };
-            }
-            else                            //Если нет вложенного департмента
-            {
-                jDep = new JObject
-                {
-                    ["SUBLEVEL"] = this.subLevel,
-                    ["ID"] = this.DepId,
-                    ["DEPNAME"] = this.Name,
-                    ["CREATIONDATE"] = this.CreationDate,
-                    ["MANAGER"] = this.depManager.FirstName + " " + this.depManager.LastName,
-                    ["WORKERS"] = jArray
-                };
-            }
-            return jDep;
-        }
-
-
-        /// <summary>
-        /// Распарсивает JSON строку в массив воркеров
-        /// </summary>
-        /// <param name="s">Строка</param>
-        /// <returns>массив воркеров</returns>
-        public static List<Employee> GetEmployeeJSON(string s)
-        {
-            var wrks = JObject.Parse(s)["WORKERS"].ToArray();
-
-            List<Employee> workers = new List<Employee>();
-            foreach (var item in wrks)
-            {
-                if (item["TYPE"].ToString() == "Worker")
-                {
-                    workers.Add(new Worker(Convert.ToUInt32(item["ID"]),
-                                           item["FirstName"].ToString(),
-                                           item["LastName"].ToString(),
-                                           Convert.ToByte(item["Age"]),
-                                           item["Department"].ToString(),
-                                           Convert.ToByte(item["ProjectCount"])));
+                    if (item.GetDepartment(departmentName) != null)
+                    {
+                        return item.GetDepartment(departmentName);
+                    }
                 }
-                else
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region МЕТОДЫ ДЛЯ РАБОТЫ С ЗАРПЛАТАМИ
+        /// <summary>
+        /// Возвращает сумму всех з/п сотрудников дочерних департаментов
+        /// </summary>
+        /// <returns></returns>
+        internal float GetChildrenWages()
+        {
+            float wages = 0;
+            foreach (var item in Departments)
+            {
+                wages += item.GetWages();
+                wages += item.GetChildrenWages();
+            }
+            return wages;
+        }
+
+        /// <summary>
+        /// Возвращает сумму всех з/п сотрудников этого департамента, включая менеджера
+        /// </summary>
+        /// <returns></returns>
+        internal float GetWages()
+        {
+            float wages = GetSSWages();
+
+            //перебираем всех сотрудников (кроме менеджера)
+            foreach (var item in Employees)
+            {
+                //если это менеджер
+                if (item.Cathegory == Cathegory.Менеджер)
                 {
-                    workers.Add(new Intern(Convert.ToUInt32(item["ID"]),
-                                           item["FirstName"].ToString(),
-                                           item["LastName"].ToString(),
-                                           Convert.ToByte(item["Age"]),
-                                           item["Department"].ToString(),
-                                           Convert.ToByte(item["ProjectCount"])));
+                    //прибавляем его з/п к общей
+                    wages += item.GetWage();
                 }
             }
-            return workers;
+
+            return wages;
+        }
+
+        /// <summary>
+        /// Возвращает сумму всех з/п сотрудников этого департамента, кроме менеджера
+        /// </summary>
+        /// <returns></returns>
+        internal float GetSSWages()
+        {
+            float wages = 0;
+
+            //перебираем всех сотрудников (кроме менеджера)
+            foreach (var item in Employees)
+            {
+                //если это не менеджер
+                if (item.Cathegory != Cathegory.Менеджер)
+                {
+                    //прибавляем его з/п к общей
+                    wages += item.GetWage();
+                }
+            }
+
+            return wages;
         }
         #endregion
+
+        #region МЕТОДЫ ДЛЯ РАБОТЫ С СОТРУДНИКАМИ
+        /// <summary>
+        /// Возвращает коллекцию всех сотрудников департамента и его наследников
+        /// </summary>
+        /// <returns></returns>
+        internal ObservableCollection<Employee> GetEmployees()
+        {
+            //создаем коллекцию
+            ObservableCollection<Employee> employees = new ObservableCollection<Employee>();
+            //помещаем в нее всех сотрудников самого департамента
+            foreach (var item in Employees)
+            {
+                employees.Add(item);
+            }
+            //помещаем в нее всех сотрудников из департаментов-потомков
+            foreach (var item in Departments)
+            {
+                foreach (var n in item.GetEmployees())
+                {
+                    employees.Add(n);
+                }
+            }
+
+            //возвращаем коллекцию
+            return employees;
+        }
+
+        /// <summary>
+        /// Ищет сотрудника по персональному номеру и возвращает его
+        /// </summary>
+        /// <param name="personnelNumber"></param>
+        /// <returns></returns>
+        internal Employee GetEmployee(int personnelNumber)
+        {
+            //сначала ищем среди сотрудников самого департамента
+            if (SearchInEmployees(personnelNumber) != null)
+            {
+                return SearchInEmployees(personnelNumber);
+            }
+            //если не нашли, ищем в департаментах-потомках
+            else
+            {
+                foreach (var item in Departments)
+                {
+                    if (item.GetEmployee(personnelNumber) != null)
+                    {
+                        return item.GetEmployee(personnelNumber);
+                    }
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Ищем сотрудника среди сотрудников этого департамента
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private Employee SearchInEmployees(int id)
+        {
+            //проверяем всех сотрудников
+            foreach (var item in Employees)
+            {
+                //если нашли нужного
+                if (item.Id == id)
+                {
+                    return item;
+                }
+            }
+            //если никого не нашли
+            return null;
+        }
+
+        /// <summary>
+        /// Удаляет сотрудника
+        /// </summary>
+        /// <param name="employee"></param>
+        internal void RemoveEmployee(Employee employee)
+        {
+            Employees.Remove(Employees.Where(n => n.Id == employee.Id).FirstOrDefault());
+        }
+
+        /// <summary>
+        /// Добавляет сотрудника
+        /// </summary>
+        internal void AddEmployee(Employee employee)
+        {
+            Employee newEmployee = employee;
+            newEmployee.DepartmentName = Name;
+            Employees.Add(newEmployee);
+        }
+        #endregion
+
+        #endregion
+
     }
 }
-

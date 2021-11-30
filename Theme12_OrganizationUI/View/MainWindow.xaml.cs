@@ -20,20 +20,20 @@ namespace Theme12_OrganizationUI.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        Organization TheBestCoders;
+        //Organization TheBestCoders;
 
         public MainWindow()
         {
             InitializeComponent();
-            TheBestCoders = new Organization(5);
-            List<Department> org = new List<Department>()
-            {
-                new Department(1,5,0),
-                new Department(2,5,0)
+            //TheBestCoders = new Organization(5);
+            //List<Department> org = new List<Department>()
+            //{
+            //    new Department(1,5,0),
+            //    new Department(2,5,0)
 
-            };
+            //};
 
-            tvDepartments.ItemsSource = TheBestCoders.deps;
+            //tvDepartments.ItemsSource = TheBestCoders.deps;
             
 
             // tvDepartments.I
@@ -49,7 +49,7 @@ namespace Theme12_OrganizationUI.View
         private void tvDepartments_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             //lvWorkers.ItemsSource = TheBestCoders.deps[tvDepartments.SelectedItem. ].employees;
-            tbTest.Text = tvDepartments.SelectedItem.ToString();
+            //tbTest.Text = tvDepartments.SelectedItem.ToString();
         }
 
       

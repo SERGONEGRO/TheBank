@@ -15,5 +15,6 @@ namespace Theme12_OrganizationUI.Models
         public Intern() : base()
         {
         }
+        
     }
 }

@@ -1,12 +1,241 @@
-﻿using System;
+﻿using Theme12_OrganizationUI.Models;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Theme12_OrganizationUI.Data
 {
-    class ApplicationContext
+    class ApplicationContext : DbContext
     {
+        //путь к файлу сохранения "Департаменты"
+        private readonly string path = @"Departments.json";
+
+        /// <summary>
+        /// Дерево департаментов
+        /// </summary>
+        public ObservableCollection<Department> DepartmentsTree { get; set; }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public ApplicationContext() : base("DefaultConnection")
+        {
+            //инициализируем дерево департаментов
+            DepartmentsTree = new ObservableCollection<Department>();
+
+            //загружаем БД
+            Load();
+        }
+
+        #region МЕТОДЫ СОХРАНЕНИЯ
+        /// <summary>
+        /// Сохраняем БД
+        /// </summary>
+        public void Save()
+        {
+            //проверяем наличие файла сохранения
+            if (!File.Exists(path))
+            {
+                //если такого нет - создаем
+                using (StreamWriter sw = new StreamWriter(new FileStream(path, FileMode.Create, FileAccess.Write))) { }
+            }
+
+            //корневой элемент
+            JObject Root = new JObject();
+
+            //дочерние департаменты 
+            JArray JDepartments = new JArray();
+
+            //создаем новый объект-департамент
+            JObject JDepartment = new JObject();
+
+            //заполняем его
+            FillDepartment(JDepartment, DepartmentsTree[0]);
+
+            //добавляем в массив
+            JDepartments.Add(JDepartment);
+
+            //помещаем элемент "департаменты" в корневой
+            Root["JDepartments"] = JDepartments;
+
+            //сериализуем
+            string json = Root.ToString();
+
+            //сохраняем
+            File.WriteAllText(path, json);
+        }
+
+        /// <summary>
+        /// Метод заполнения одного департамента
+        /// </summary>
+        private void FillDepartment(JObject targetObject, Department sourceDepartment)
+        {
+            //Элемент "название департамента"
+            targetObject["name"] = sourceDepartment.Name;
+
+            //дочерние департаменты 
+            JArray JDepartments = new JArray();
+
+            //заполняем массив департаментов
+            for (int i = 0; i < sourceDepartment.Departments.Count; i++)
+            {
+                //создаем новый объект-департамент
+                JObject JDepartment = new JObject();
+                //заполняем его
+                FillDepartment(JDepartment, sourceDepartment.Departments[i]);
+                //добавляем в массив
+                JDepartments.Add(JDepartment);
+            }
+
+            //элемент "департаменты"
+            targetObject["JDepartments"] = JDepartments;
+
+            //сотрудники
+            JArray JEmployees = new JArray();
+
+            //заполняем массив сотрудников
+            for (int i = 0; i < sourceDepartment.Employees.Count; i++)
+            {
+                //создаем новый объект-сотрудник
+                JObject JEmployee = new JObject();
+                //заполняем его
+                FillEmployee(JEmployee, sourceDepartment.Employees[i]);
+                //добавляем в массив
+                JEmployees.Add(JEmployee);
+            }
+
+            //элемент "сотрудники"
+            targetObject["JEmployees"] = JEmployees;
+
+        }
+
+        /// <summary>
+        /// Метод заполнения одного сотрудника
+        /// </summary>
+        private void FillEmployee(JObject jEmployee, Employee employee)
+        {
+            //заполняем все
+            jEmployee["ID"] = employee.Id;
+            jEmployee["FIRSTNAME"] = employee.FirstName;
+            jEmployee["LASTNAME"] = employee.LastName;
+            jEmployee["AGE"] = employee.Age;
+            jEmployee["DEPARTMENTNAME"] = employee.DepartmentName;
+            jEmployee["CATHEGORY"] = employee.Cathegory.ToString();
+            jEmployee["RATE"] = employee.Rate;
+            jEmployee["HOURS"] = employee.Hours;
+            jEmployee["PROJECTSCOUNT"] = employee.ProjectsCount;
+            
+
+        }
+        #endregion
+
+        #region МЕТОДЫ ЗАГРУЗКИ
+        /// <summary>
+        /// Загружаем БД
+        /// </summary>
+        private void Load()
+        {
+            //если нет такого файла
+            if (!File.Exists(path))
+            {
+                //создаем новый департамент
+                Department newDepartment = new Department("Организация");
+
+                //добавляем его в дерево департаментов
+                DepartmentsTree.Add(newDepartment);
+
+                //сохраняем БД
+                Save();
+            }
+            else
+            {
+                //читаем файл
+                string json = File.ReadAllText(path);
+
+                //выгружаем данные
+                var JDepartments = JObject.Parse(json)["JDepartments"].ToArray();
+
+                //добавляем его в дерево департаментов
+                DepartmentsTree.Add(ParseDepartment(JDepartments[0], ""));
+            }
+
+        }
+
+        /// <summary>
+        /// Выгружает один департамент из JSON
+        /// </summary>
+        private Department ParseDepartment(JToken jDepartment, string parentName)
+        {
+            //получаем название департамента
+            string name = jDepartment["name"].ToString();
+
+            //создаем новый департамент
+            Department dataDepartment = new Department(name, parentName);
+
+            //выгружаем список департаментов
+            var JDepartments = jDepartment["JDepartments"].ToArray();
+
+            //получаем все дочерние департаменты
+            foreach (var item in JDepartments)
+            {
+                dataDepartment.Departments.Add(ParseDepartment(item, dataDepartment.Name));
+            }
+
+            //если в элементе есть список сотрудников (его нет в корневом) 
+            if (jDepartment["JEmployees"] != null)
+            {
+                //выгружаем список сотрудников
+                var JEmployees = jDepartment["JEmployees"].ToArray();
+
+                //получаем всех сотрудников
+                foreach (var item in JEmployees)
+                {
+                    //парсим сотрудника в департамент
+                    dataDepartment.Employees.Add(ParseEmployee(item));
+                }
+            }
+            //возвращаем заполненный департамент
+            return dataDepartment;
+        }
+
+        /// <summary>
+        /// Выгружает одного сотрудника из JSON
+        /// </summary>
+        private Employee ParseEmployee(JToken jEmployee)
+        {
+            //объявляем нового сотрудника
+            Employee employee;
+
+            string cathegory = jEmployee["Cathegory"].ToString();
+
+            //выясняем категорию сотрудника (класс) и инициализируем
+            if (cathegory == "Менеджер") { employee = new Manager(); }
+            else if (cathegory == "Специалист") { employee = new Worker(); }
+            else { employee = new Intern(); }
+
+            //заполняем его поля
+            employee.Id = (int)jEmployee["ID"];
+            employee.FirstName = jEmployee["FIRSTNAME"].ToString();
+            employee.LastName = jEmployee["LASTNAME"].ToString();
+            employee.Age = (byte)jEmployee["AGE"];
+            employee.DepartmentName = jEmployee["DEPARTMENTNAME"].ToString();
+            employee.Rate = (int)jEmployee["RATE"];
+            employee.Hours = (int)jEmployee["HOURS"];
+            employee.ProjectsCount = (byte)jEmployee["PROJECTSCOUNT"];
+           
+            if ((string)jEmployee["CATHEGORY"] == "Менеджер") { employee.Cathegory = Cathegory.Менеджер; }
+            else if ((string)jEmployee["Cathegory"] == "Специалист") { employee.Cathegory = Cathegory.Специалист; }
+            else if ((string)jEmployee["Cathegory"] == "Интерн") { employee.Cathegory = Cathegory.Интерн; }
+
+            
+
+            return employee;
+        }
+        #endregion
+
     }
 }

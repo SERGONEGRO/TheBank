@@ -29,7 +29,7 @@ namespace Theme12_OrganizationUI.Models
         /// <summary>
         /// id
         /// </summary>
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Имя
