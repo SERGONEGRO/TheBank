@@ -10,31 +10,27 @@ namespace Theme12_OrganizationUI.Models
     class Manager : Employee
     {
         /// <summary>
-        /// Оплата = 15% от всех, но не меньше 1300
-        /// </summary
-        new public double Salary
-        {
-            get
-            {
-                return salary;
-            }
-
-            set { this.salary = (uint)value; }
-        }
-
-        /// <summary>
-        /// конструктор
+        /// Производит расчет заработной платы и возвращает ее
         /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="FirstName"></param>
-        /// <param name="LastName"></param>
-        /// <param name="Age"></param>
-        /// <param name="Department"></param>
-        /// <param name="ProjectsCount"></param>
-        /// <param name=""></param>
-        public Manager(uint ID, string FirstName, string LastName, byte Age, string Department, byte ProjectCount)
-            : base(ID, FirstName, LastName, Age, Department, ProjectCount)
+        /// <returns></returns>
+        public override float GetWage()
         {
+            //находим родительский департамент
+            Department parent = DataWorker.GetDepartment(DepartmentName);
+            //получаем из него сумму всех з/п подчиненных сотрудников (т.е. всех, кроме менежера)
+            //получаем из него сумму всех з/п сотрудников в дочерних департаментах
+            //складываем эти цифры
+            //высчитываем 15% от этой суммы
+            float managerWage = (parent.GetSSWages() + parent.GetChildrenWages()) / 100 * 15;
+            //проверяем, превышает ли полученная цифра минимальную з/п менеджера
+            if (managerWage >= 1300)
+            {
+                return managerWage;
+            }
+            else
+            {
+                return 1300;
+            }
         }
 
         /// <summary>
