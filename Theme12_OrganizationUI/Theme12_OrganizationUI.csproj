@@ -69,6 +69,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\ApplicationContext.cs" />
+    <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="ViewModel\DataManageVM.cs" />
     <Compile Include="Models\DataWorker.cs" />
     <Compile Include="Models\Worker.cs" />
