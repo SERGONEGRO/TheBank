@@ -281,6 +281,7 @@ namespace Theme12_OrganizationUI.Models
                     department.Departments.Add(new Department(newDepartmentName, parentName));
                     //сохраняем БД
                     db.Save();
+
                     //инициируем событие "БД изменилась"
                     DBChanged();
 
@@ -327,12 +328,15 @@ namespace Theme12_OrganizationUI.Models
             //обращаемся к бд
             using (ApplicationContext db = new ApplicationContext())
             {
-                //пытаемся найти департамент с таким именем
-                if (db.DepartmentsTree[0].GetDepartment(name) != null)
-                {
-                    return false;
-                }
-                return true;
+                ////пытаемся найти департамент с таким именем используя linq
+                bool checkIsExist = db.DepartmentsTree.Any(el => el.Name == name);
+                return !checkIsExist;
+                ////пытаемся найти департамент с таким именем 
+                //if (db.DepartmentsTree[0].GetDepartment(name) != null)
+                //{
+                //    return false;
+                //}
+                //return true;
             }
         }
 
