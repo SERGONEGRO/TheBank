@@ -57,41 +57,41 @@ namespace Theme12_OrganizationUI.Models
         /// Возвращает зарплатные ведомости на всех сотрудников
         /// </summary>
         /// <returns></returns>
-        //internal static ObservableCollection<Payroll> GetPayrolls()
-        //{
-        //    //обращаемся к бд
-        //    using (ApplicationContext db = new ApplicationContext())
-        //    {
+        internal static ObservableCollection<Payroll> GetPayrolls()
+        {
+            //обращаемся к бд
+            using (ApplicationContext db = new ApplicationContext())
+            {
 
-        //        ObservableCollection<Payroll> payrolls = new ObservableCollection<Payroll>();
+                ObservableCollection<Payroll> payrolls = new ObservableCollection<Payroll>();
 
-        //        foreach (var item in db.DepartmentsTree[0].GetEmployees())
-        //        {
-        //            payrolls.Add(new Payroll(item.PersonnelNumber, item.Surname, item.Name, item.MiddleName, item.DepartmentName,
-        //                item.Cathegory.ToString(), item.Position, item.GetWage()));
-        //        }
+                foreach (var item in db.DepartmentsTree[0].GetEmployees())
+                {
+                    payrolls.Add(new Payroll(item.Id, item.LastName, item.FirstName, item.DepartmentName,
+                        item.Cathegory.ToString(), item.GetWage()));
+                }
 
-        //        return payrolls;
-        //    }
-        //}
+                return payrolls;
+            }
+        }
 
         /// <summary>
-        /// Возвращает коллекцию всего персонала (сотрудников с почасовой оплатой)
+        /// Возвращает коллекцию всеx Интернов (сотрудников с почасовой оплатой)
         /// </summary>
         /// <returns></returns>
-        //internal static ObservableCollection<EditableStaff> GetStaffs()
-        //{
-        //    ObservableCollection<EditableStaff> staffs = new ObservableCollection<EditableStaff>();
+        internal static ObservableCollection<EditableStaff> GetStaffs()
+        {
+            ObservableCollection<EditableStaff> staffs = new ObservableCollection<EditableStaff>();
 
-        //    foreach (var item in GetEmployees())
-        //    {
-        //        if (item.Cathegory == Cathegory.Персонал)
-        //        {
-        //            staffs.Add(new EditableStaff(item.Surname, item.Name, item.MiddleName, item.DepartmentName, item.Position, item.Hours, item.PersonnelNumber));
-        //        }
-        //    }
-        //    return staffs;
-        //}
+            foreach (var item in GetEmployees())
+            {
+                if (item.Cathegory == Cathegory.Интерн|| item.Cathegory == Cathegory.Специалист)
+                {
+                    staffs.Add(new EditableStaff(item.LastName, item.FirstName, item.DepartmentName, item.Hours, item.Id));
+                }
+            }
+            return staffs;
+        }
 
         /// <summary>
         /// Возвращает запрошенный департамент (находит по имени)
