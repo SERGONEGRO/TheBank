@@ -1,12 +1,84 @@
-﻿<Window x:Class="Theme12_OrganizationUI.View.EmployeesTablePage"
+﻿<Page x:Class="Theme12_OrganizationUI.View.EmployeesTablePage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Theme12_OrganizationUI.View"
-        mc:Ignorable="d"
-        Title="EmployeesTablePage" Height="450" Width="800">
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Theme12_OrganizationUI.View" 
+      mc:Ignorable="d" 
+      Title="EmployeesTablePage"
+      Background="White">
     <Grid>
-        
-    </Grid>
-</Window>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <!-- Таблица -->
+            <ListView ItemsSource="{Binding Employees}" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Stretch" Grid.Row="0" Name="tableLV" HorizontalContentAlignment="Stretch">
+                <ListView.View>
+                    <GridView>
+                        <!-- Столбец: ФИО -->
+                        <GridViewColumn Width="200">
+                            <GridViewColumn.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="ФИО" Padding="5 3" FontWeight="DemiBold" Grid.Column="0"/>
+                                    <Button Command="{Binding SortByNameCommand}" Content="sort" Grid.Column="1" Margin="5 0"/>
+                                </Grid>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                            <Run Text="{Binding LastName}"/>
+                            <Run Text="{Binding FirsName}"/>
+                                </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <!-- Столбец: Департамент -->
+                        <GridViewColumn Width="200">
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Департамент" Padding="5 3" FontWeight="DemiBold"/>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DepartmentName}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <!-- Столбец: Категория -->
+                    <GridViewColumn Width="200">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Категория" Padding="5 3" FontWeight="DemiBold"/>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Cathegory}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- Столбец: Табельный номер -->
+                        <GridViewColumn Width="200">
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Табельный номер" Padding="5 3" FontWeight="DemiBold"/>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PersonnelNumber}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <!-- Кнопки -->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5">
+                <Button Content="Удалить сотрудника" Margin="5" Padding="5 3" Command="{Binding RemoveEmployeeCommand}"/>
+                <Button Content="Переместить сотрудника" Margin="5" Padding="5 3" Command="{Binding ReplaceEmployeeCommand}"/>
+                <Button Content="Редактировать сотрудника" Margin="5" Padding="5 3" Command="{Binding EditEmployeeCommand}"/>
+            </StackPanel>
+
+        </Grid>
+</Page>

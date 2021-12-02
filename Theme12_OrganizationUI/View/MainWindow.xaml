@@ -5,59 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Theme12_OrganizationUI.View"
         mc:Ignorable="d"
-        Title="Organization_UI" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <TabControl Grid.Row="0">
-            <TabItem Name="UsersTab">
-                <TabItem.Header>
-                    <TextBlock Text="Staff"/>
-                </TabItem.Header>
-                <ListView>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name"/>
-                            <GridViewColumn Header="SurName"/>
-                            <GridViewColumn Header="Position"/>
-                            <GridViewColumn Header="Age"/>
-                            <GridViewColumn Header="Salary"/>
-                            <GridViewColumn Header="Department"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </TabItem>
-            <TabItem Name="PositionTab">
-                <TabItem.Header>
-                    <TextBlock Text="Position"/>
-                </TabItem.Header>
-                <ListView>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name"/>
-                            <GridViewColumn Header="Salary"/>
-                            <GridViewColumn Header="Count of staffs"/>
-                            <GridViewColumn Header="Max number"/>
-                            <GridViewColumn Header="Department"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </TabItem>
-            <TabItem Name="DepartmentsTab">
-                <TabItem.Header>
-                    <TextBlock Text="Departments"/>
-                </TabItem.Header>
-                <ListView>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name"/>
-                            <GridViewColumn Header="Count of positions"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </TabItem>
-        </TabControl>
-    </Grid>
+        Title="MainWindow"
+        WindowState="Maximized">
+    <!-- Вкладки -->
+    <TabControl>
+        <!-- Вкладка "Департаменты" -->
+        <TabItem Header="Департаменты">
+            <!-- Фрейм -->
+            <Frame Content="{Binding DepartmentsPage}" NavigationUIVisibility="Hidden"/>
+        </TabItem>
+        <!-- Вкладка "Сотрудники" -->
+        <TabItem Header="Сотрудники">
+            <!-- Фрейм -->
+            <Frame Content="{Binding EmployeesPage}" NavigationUIVisibility="Hidden"/>
+        </TabItem>
+    </TabControl>
 </Window>

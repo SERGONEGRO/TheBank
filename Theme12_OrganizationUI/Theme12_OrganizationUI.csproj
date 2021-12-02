@@ -77,6 +77,7 @@
     <Compile Include="ViewModel\DepartmentsPageVM.cs" />
     <Compile Include="ViewModel\EmployeePageVM.cs" />
     <Compile Include="ViewModel\EmployeesPageVM.cs" />
+    <Compile Include="ViewModel\EmployeesTablePageVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\ReplaceEmployeeWindowVM.cs" />
     <Compile Include="ViewModel\SalaryPageVM.cs" />

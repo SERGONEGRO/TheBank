@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Theme12_OrganizationUI.View"
         mc:Ignorable="d"
-        Title="ReplaceEmployeeWindow" Height="450" Width="800">
+         Title="Перемещение сотрудника" Height="200" Width="600">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Сообщение -->
+        <TextBlock Name="messageTB" 
+                   Text="Выберите департамент, в который будет перемещен "
+                   Grid.Row="0" VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <!-- Выбор департамента -->
+        <ComboBox Name="departmentsCB" ItemsSource="{Binding Departments}"
+                  SelectedItem="{Binding Path=Department}"
+                  VerticalAlignment="Center" HorizontalAlignment="Center"
+                  Width="300" Grid.Row="1">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <!-- Кнопка -->
+        <Button Content="Переместить" Padding="5 3"
+                Name="ReplaceDepartmentBttn" 
+                Command="{Binding ReplaceEmployeeCommand}"
+                Margin="5" Grid.Row="2" VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
     </Grid>
 </Window>

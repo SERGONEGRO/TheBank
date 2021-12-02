@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Theme12_OrganizationUI.ViewModel;
 
 namespace Theme12_OrganizationUI.View
 {//https://www.wpf-tutorial.com/ru/85/элемент-управления-treeview/treeview-привязка-данных-и-несколько-шаблонов/
@@ -25,33 +26,9 @@ namespace Theme12_OrganizationUI.View
         public MainWindow()
         {
             InitializeComponent();
-            //TheBestCoders = new Organization(5);
-            //List<Department> org = new List<Department>()
-            //{
-            //    new Department(1,5,0),
-            //    new Department(2,5,0)
 
-            //};
-
-            //tvDepartments.ItemsSource = TheBestCoders.deps;
-            
-
-            // tvDepartments.I
+            //подключаем VM
+            DataContext = new MainWindowVM(this);
         }
-
-        private void btnRef(object sender, RoutedEventArgs e)
-        {
-            //cbDepartment.Items.Refresh();
-            //tvDepartments.Items.Refresh();
-            ////lvWorkers.Items.Refresh();
-        }
-
-        private void tvDepartments_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            //lvWorkers.ItemsSource = TheBestCoders.deps[tvDepartments.SelectedItem. ].employees;
-            //tbTest.Text = tvDepartments.SelectedItem.ToString();
-        }
-
-      
     }
 }

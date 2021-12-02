@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Theme12_OrganizationUI.ViewModel;
+using Theme12_OrganizationUI.Models;
 
 namespace Theme12_OrganizationUI.View
 {
@@ -19,9 +21,11 @@ namespace Theme12_OrganizationUI.View
     /// </summary>
     public partial class ReplaceEmployeeWindow : Window
     {
-        public ReplaceEmployeeWindow()
+        public ReplaceEmployeeWindow(Employee employee)
         {
             InitializeComponent();
+            //подключаем VM
+            DataContext = new ReplaceEmployeeWindowVM(this, employee);
         }
     }
 }
