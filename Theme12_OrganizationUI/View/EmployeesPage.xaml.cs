@@ -11,17 +11,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Theme12_OrganizationUI.ViewModel;
 
 namespace Theme12_OrganizationUI.View
 {
     /// <summary>
     /// Логика взаимодействия для EmployeesPage.xaml
     /// </summary>
-    public partial class EmployeesPage : Window
+    public partial class EmployeesPage : Page
     {
         public EmployeesPage()
         {
             InitializeComponent();
+            //подключаем VM
+            DataContext = new EmployeesPageVM(this);
         }
     }
 }

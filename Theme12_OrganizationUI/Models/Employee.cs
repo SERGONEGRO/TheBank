@@ -76,6 +76,10 @@ namespace Theme12_OrganizationUI.Models
         /// </summary>
         /// <returns></returns>
         public abstract float GetWage();
+        /// <summary>
+        /// Дата рождения
+        /// </summary>
+        public DateTime DateOfBirth { get; set; }
 
 
 
@@ -83,7 +87,7 @@ namespace Theme12_OrganizationUI.Models
 
         #region Методы
 
-       
+
 
         /// <summary>
         /// Employee в JSON
