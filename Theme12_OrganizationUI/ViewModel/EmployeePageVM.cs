@@ -346,7 +346,8 @@ namespace Theme12_OrganizationUI.ViewModel
                 newEmployee.Cathegory = Cathegory.Интерн;
                 newEmployee.Rate = Convert.ToInt32(rateTB.Text);
             }
-           
+            newEmployee.DepartmentName = (departmentCB.SelectedItem as Department).Name;
+
         }
 
         /// <summary>

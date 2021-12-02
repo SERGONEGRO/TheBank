@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Theme12_OrganizationUI.View"
         mc:Ignorable="d"
-        Title="MainWindow"
-        WindowState="Maximized">
+        Title="MainWindow" Height="550" Width="870">
     <!-- Вкладки -->
     <TabControl>
         <!-- Вкладка "Департаменты" -->

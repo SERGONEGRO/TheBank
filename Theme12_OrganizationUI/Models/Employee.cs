@@ -44,7 +44,17 @@ namespace Theme12_OrganizationUI.Models
         /// <summary>
         /// Возраст
         /// </summary>
-        public byte Age { get; set; }
+        public byte Age 
+        { get
+            {
+                if (DateTime.Now <= DateOfBirth)
+                    return 0;
+                int n = DateTime.Now.Year - DateOfBirth.Year;
+                if (DateOfBirth.DayOfYear > DateTime.Now.DayOfYear)
+                    --n;
+                return (byte) n;
+            }
+        }
 
         /// <summary>
         /// Отдел
@@ -69,7 +79,7 @@ namespace Theme12_OrganizationUI.Models
         /// <summary>
         /// Количество проектов
         /// </summary>
-        public byte ProjectsCount { get; set; }
+        //public byte ProjectsCount { get; set; }
 
         /// <summary>
         /// Производит расчет заработной платы и возвращает ее
@@ -93,21 +103,21 @@ namespace Theme12_OrganizationUI.Models
         /// Employee в JSON
         /// </summary>
         /// <returns></returns>
-        public JObject SerializeEmployeeToJson()
-        {
-            JObject jEmployee = new JObject
-            {
-                ["ID"] = Id,
-                ["FirstName"] = FirstName,
-                ["LastName"] = LastName,
-                ["Age"] = Age,
-                ["Salary"] = GetWage(),
-                ["Department"] = DepartmentName,
-                ["ProjectCount"] = ProjectsCount,
-                ["Cathegory"] = Cathegory.ToString()
-            };
-            return jEmployee;
-        }
+        //public JObject SerializeEmployeeToJson()
+        //{
+        //    JObject jEmployee = new JObject
+        //    {
+        //        ["ID"] = Id,
+        //        ["FIRSTNAME"] = FirstName,
+        //        ["LASTNAME"] = LastName,
+        //        ["Age"] = Age,
+        //        ["Salary"] = GetWage(),
+        //        ["DEPARTMENTNAME"] = DepartmentName,
+        //        //["ProjectCount"] = ProjectsCount,
+        //        ["CATHEGORY"] = Cathegory.ToString()
+        //    };
+        //    return jEmployee;
+        //}
 
         #endregion
 

@@ -122,12 +122,12 @@ namespace Theme12_OrganizationUI.Data
             jEmployee["ID"] = employee.Id;
             jEmployee["FIRSTNAME"] = employee.FirstName;
             jEmployee["LASTNAME"] = employee.LastName;
-            jEmployee["AGE"] = employee.Age;
+            jEmployee["DateOfBirth"] = employee.DateOfBirth;
             jEmployee["DEPARTMENTNAME"] = employee.DepartmentName;
             jEmployee["CATHEGORY"] = employee.Cathegory.ToString();
             jEmployee["RATE"] = employee.Rate;
             jEmployee["HOURS"] = employee.Hours;
-            jEmployee["PROJECTSCOUNT"] = employee.ProjectsCount;
+            //jEmployee["PROJECTSCOUNT"] = employee.ProjectsCount;
             
 
         }
@@ -210,7 +210,7 @@ namespace Theme12_OrganizationUI.Data
             //объявляем нового сотрудника
             Employee employee;
 
-            string cathegory = jEmployee["Cathegory"].ToString();
+            string cathegory = jEmployee["CATHEGORY"].ToString();
 
             //выясняем категорию сотрудника (класс) и инициализируем
             if (cathegory == "Менеджер") { employee = new Manager(); }
@@ -221,11 +221,11 @@ namespace Theme12_OrganizationUI.Data
             employee.Id = (int)jEmployee["ID"];
             employee.FirstName = jEmployee["FIRSTNAME"].ToString();
             employee.LastName = jEmployee["LASTNAME"].ToString();
-            employee.Age = (byte)jEmployee["AGE"];
+            employee.DateOfBirth = (DateTime)jEmployee["DateOfBirth"];
             employee.DepartmentName = jEmployee["DEPARTMENTNAME"].ToString();
             employee.Rate = (int)jEmployee["RATE"];
             employee.Hours = (int)jEmployee["HOURS"];
-            employee.ProjectsCount = (byte)jEmployee["PROJECTSCOUNT"];
+            //employee.ProjectsCount = (byte)jEmployee["PROJECTSCOUNT"];
            
             if ((string)jEmployee["CATHEGORY"] == "Менеджер") { employee.Cathegory = Cathegory.Менеджер; }
             else if ((string)jEmployee["Cathegory"] == "Специалист") { employee.Cathegory = Cathegory.Специалист; }
