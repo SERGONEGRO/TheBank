@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,14 +71,43 @@
     </ApplicationDefinition>
     <Compile Include="Data\ApplicationContext.cs" />
     <Compile Include="Models\RelayCommand.cs" />
-    <Compile Include="ViewModel\DataManageVM.cs" />
     <Compile Include="Models\DataWorker.cs" />
     <Compile Include="Models\Worker.cs" />
+    <Compile Include="ViewModel\DepartmentPageVM.cs" />
+    <Compile Include="ViewModel\DepartmentsPageVM.cs" />
+    <Compile Include="ViewModel\EmployeePageVM.cs" />
+    <Compile Include="ViewModel\EmployeesPageVM.cs" />
+    <Compile Include="ViewModel\MainWindowVM.cs" />
+    <Compile Include="ViewModel\ReplaceEmployeeWindowVM.cs" />
+    <Compile Include="ViewModel\SalaryPageVM.cs" />
+    <Compile Include="ViewModel\TimeTrackingPageVM.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="View\ReplaceEmployeeWindow.xaml.cs">
+      <DependentUpon>ReplaceEmployeeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SalaryPage.xaml.cs">
+      <DependentUpon>SalaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TimeTrackingPage.xaml.cs">
+      <DependentUpon>TimeTrackingPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\DepartmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DepartmentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeesTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,13 +125,34 @@
     <Compile Include="View\DepartmentPage.xaml.cs">
       <DependentUpon>DepartmentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DepartmentsPage.xaml.cs">
+      <DependentUpon>DepartmentsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeePage.xaml.cs">
       <DependentUpon>EmployeePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeesPage.xaml.cs">
+      <DependentUpon>EmployeesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeesTablePage.xaml.cs">
+      <DependentUpon>EmployeesTablePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ReplaceEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SalaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TimeTrackingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Manager.cs" />

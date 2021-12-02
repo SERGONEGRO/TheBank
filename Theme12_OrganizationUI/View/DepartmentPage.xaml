@@ -1,23 +1,71 @@
-﻿<Window x:Class="Theme12_OrganizationUI.View.DepartmentPage"
+﻿<Page x:Class="Theme12_OrganizationUI.View.DepartmentPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Theme12_OrganizationUI.View"
         mc:Ignorable="d"
-        Title="DepartmentPage" Height="300" Width="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Vertical"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Width="200">
-            <TextBlock Text="Наименование:"/>
-            <TextBox Text=""/>
+        Title="DepartmentPage" Height="450" Width="800"
+        Background="Aqua">
+
+    <StackPanel>
+        <!-- Блок: Сообщение -->
+        <TextBlock Name="messageTB" Margin="5" FontWeight="DemiBold"/>
+        <!-- Блок: Наименование -->
+        <DockPanel LastChildFill="true" Margin="5" Background="White">
+            <TextBlock Text="Наименование*:" Margin="5 0"/>
+            <TextBox Name="DepartmentNameTB" Margin="5 0"/>
+        </DockPanel>
+        <!-- Блок: Родительский департамент -->
+        <DockPanel LastChildFill="true" Margin="5" Background="White">
+            <TextBlock Text="Родительский департамент*:" Margin="5 0"/>
+            <!-- Выпадающий список "Родительский департамент" -->
+            <ComboBox Name="ParentDepartmentCB" ItemsSource="{Binding Departments}" SelectedItem="{Binding Path=ParentDepartment}" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </DockPanel>
+        <!-- Блок: Дочерние департаменты -->
+        <GroupBox Background="White" Margin="5">
+            <GroupBox.Header>
+                <TextBlock Text="Департаменты" FontWeight="DemiBold"/>
+            </GroupBox.Header>
+            <ListBox BorderThickness="0" ItemsSource="{Binding ChildrenDepartments}" IsEnabled="False">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+        <!-- Блок: Сотрудники -->
+        <GroupBox Background="White" Margin="5">
+            <GroupBox.Header>
+                <TextBlock Text="Сотрудники" FontWeight="DemiBold"/>
+            </GroupBox.Header>
+            <ListBox BorderThickness="0" ItemsSource="{Binding Employees}" IsEnabled="False">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding FirstName}"/>
+                            <Run Text="{Binding LastName}"/>
+                            <Run Text="{Binding Age}"/>
+                            <Run Text=": "/>
+                            <Run Text="{Binding Cathegory}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+        <!-- Блок: Кнопки -->
+        <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
+            <Button Content="Сохранить"  Padding="5 3" Name="SaveDepartmentBttn" Command="{Binding SaveDepartmentCommand}" Margin="5"/>
+            <Button Content="Переместить" Padding="5 3" Name="ReplaceDepartmentBttn" Command="{Binding ReplaceDepartmentCommand}" Margin="5"/>
+            <Button Content="Переименовать" Padding="5 3" Name="RenameDepartmentBttn" Command="{Binding RenameDepartmentCommand}" Margin="5"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Add Department"/>
-    </Grid>
-</Window>
+
+    </StackPanel>
+</Page>

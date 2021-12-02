@@ -1,27 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Theme12_OrganizationUI.Models;
+using Theme12_OrganizationUI.ViewModel;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Theme12_OrganizationUI.View
 {
     /// <summary>
     /// Логика взаимодействия для DepartmentPage.xaml
     /// </summary>
-    public partial class DepartmentPage : Window
+    public partial class DepartmentPage : Page
     {
-        public DepartmentPage()
+        /// <summary>
+        /// Конструктор (при показе существующего департамента)
+        /// </summary>
+        /// <param name="department"></param>
+        public DepartmentPage(Department department)
         {
             InitializeComponent();
+
+            //подключаем VM
+            DataContext = new DepartmentPageVM(this, department);
+
+        }
+
+        /// <summary>
+        /// Конструктор (при создании нового департамента)
+        /// </summary>
+        public DepartmentPage(string parentName)
+        {
+            InitializeComponent();
+
+            //подключаем VM
+            DataContext = new DepartmentPageVM(this);
         }
     }
 }

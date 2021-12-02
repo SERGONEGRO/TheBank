@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Theme12_OrganizationUI.Model
+namespace Theme12_OrganizationUI.Models
 {
     public class RelayCommand : ICommand
     {

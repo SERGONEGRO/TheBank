@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Theme12_OrganizationUI.ViewModel
 {
-    class DataManageVM
+    class ReplaceEmployeeWindowVM
     {
     }
 }
