@@ -25,7 +25,7 @@ namespace Theme12_OrganizationUI.ViewModel
         }
 
         /// <summary>
-        /// Конструктор (существующий сорудник)
+        /// Конструктор (существующий сотрудник)
         /// </summary>
         /// <param name="page"></param>
         public EmployeePageVM(Page page, Employee employee)
@@ -64,6 +64,7 @@ namespace Theme12_OrganizationUI.ViewModel
         /// Граница блока: категория должности
         /// </summary>
         Border positionCathegoryBorder;
+        #endregion
 
         #region ТЕКСТБОКСЫ
         /// <summary>
@@ -81,7 +82,6 @@ namespace Theme12_OrganizationUI.ViewModel
         /// </summary>
         TextBox rateTB;
 
-      
         #endregion
 
         #region РАДИОКНОПКИ
@@ -111,8 +111,6 @@ namespace Theme12_OrganizationUI.ViewModel
        
         #endregion
 
-       
-        #endregion
 
         #region ИСТОЧНИКИ ДАННЫХ
        

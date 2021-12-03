@@ -19,8 +19,19 @@
                       Name="tableLV" HorizontalContentAlignment="Stretch">
                 <ListView.View>
                     <GridView>
-                        <!-- Столбец: ФИО -->
-                        <GridViewColumn Width="200">
+                    <!-- Столбец: Табельный номер -->
+                    <GridViewColumn Width="50">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="id" Padding="5 3" FontWeight="DemiBold"/>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Id}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- Столбец: ФИО -->
+                        <GridViewColumn Width="auto">
                             <GridViewColumn.Header>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -34,14 +45,14 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                            <Run Text="{Binding Lastname}"/>
+                            <Run Text="{Binding LastName}"/>
                             <Run Text="{Binding FirstName}"/>
                                 </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <!-- Столбец: Департамент -->
-                        <GridViewColumn Width="200">
+                    <GridViewColumn Width="auto">
                             <GridViewColumn.Header>
                                 <TextBlock Text="Департамент" Padding="5 3" FontWeight="DemiBold"/>
                             </GridViewColumn.Header>
@@ -52,7 +63,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <!-- Столбец: Категория -->
-                    <GridViewColumn Width="200">
+                    <GridViewColumn Width="auto">
                         <GridViewColumn.Header>
                             <TextBlock Text="Категория" Padding="5 3" FontWeight="DemiBold"/>
                         </GridViewColumn.Header>
@@ -62,18 +73,41 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <!-- Столбец: Табельный номер -->
-                        <GridViewColumn Width="200">
-                            <GridViewColumn.Header>
-                                <TextBlock Text="Табельный номер" Padding="5 3" FontWeight="DemiBold"/>
-                            </GridViewColumn.Header>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding PersonnelNumber}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
+                    <!-- Столбец: Возраст -->
+                    <GridViewColumn Width="auto">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Возраст" Padding="5 3" FontWeight="DemiBold"/>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Age}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- Столбец: Ставка -->
+                    <GridViewColumn Width="auto">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Ставка" Padding="5 3" FontWeight="DemiBold"/>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Rate}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- Столбец: Количество отработанных часов -->
+                    <GridViewColumn Width="auto">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Отработанных часов" Padding="5 3" FontWeight="DemiBold"/>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Hours}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                </GridView>
                 </ListView.View>
             </ListView>
             <!-- Кнопки -->

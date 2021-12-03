@@ -5,11 +5,12 @@
         /// <summary>
         /// Конструктор
         /// </summary>
-        public EditableStaff(string surename, string name, string departmentName,int hours, int personnelNumber)
+        public EditableStaff(string surename, string name, string departmentName, string cathegory, int hours, int personnelNumber)
         {
             PersonnelNumber = personnelNumber;
             Fullname = $"{surename} {name}";
             DepartmentName = departmentName;
+            Cathegory = cathegory;
             OriginalHours = hours;
             EditableHours = hours;
         }
@@ -28,6 +29,11 @@
         /// Департамент
         /// </summary>
         public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// Категория должности
+        /// </summary>
+        public string Cathegory { get; set; }
 
         /// <summary>
         /// Количество отработанных часов (как в базе)

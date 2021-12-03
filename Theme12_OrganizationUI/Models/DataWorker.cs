@@ -85,9 +85,9 @@ namespace Theme12_OrganizationUI.Models
 
             foreach (var item in GetEmployees())
             {
-                if (item.Cathegory == Cathegory.Интерн|| item.Cathegory == Cathegory.Специалист)
+                if (item.Cathegory == Cathegory.Интерн)
                 {
-                    staffs.Add(new EditableStaff(item.LastName, item.FirstName, item.DepartmentName, item.Hours, item.Id));
+                    staffs.Add(new EditableStaff(item.LastName, item.FirstName, item.DepartmentName,item.Cathegory.ToString(), item.Hours, item.Id));
                 }
             }
             return staffs;

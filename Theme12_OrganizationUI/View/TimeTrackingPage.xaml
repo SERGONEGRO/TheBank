@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Theme12_OrganizationUI.View"
         mc:Ignorable="d"
-        Title="TimeTrackingPage" Height="450" Width="800">
+        Title="TimeTrackingPage">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -38,14 +38,14 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <!-- Столбец: Должность -->
+                        <!-- Столбец: категория -->
                         <GridViewColumn Width="200">
                             <GridViewColumn.Header>
-                                <TextBlock Text="Должность" Padding="5 3" FontWeight="DemiBold"/>
+                                <TextBlock Text="Категория" Padding="5 3" FontWeight="DemiBold"/>
                             </GridViewColumn.Header>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Position}"/>
+                                    <TextBlock Text="{Binding Cathegory}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
