@@ -82,6 +82,11 @@ namespace Theme12_OrganizationUI.ViewModel
         /// </summary>
         TextBox rateTB;
 
+        /// <summary>
+        /// Текстбокс: Id
+        /// </summary>
+        TextBox idTB;
+
         #endregion
 
         #region РАДИОКНОПКИ
@@ -340,6 +345,7 @@ namespace Theme12_OrganizationUI.ViewModel
                 newEmployee.Rate = Convert.ToInt32(rateTB.Text);
             }
             newEmployee.DepartmentName = (departmentCB.SelectedItem as Department).Name;
+            newEmployee.Id = Convert.ToInt32(idTB.Text);
 
         }
 
@@ -364,6 +370,9 @@ namespace Theme12_OrganizationUI.ViewModel
            
             //текущий департамент
             department = Departments.Where(n => n.Name == employee.DepartmentName).FirstOrDefault();
+
+            //Id
+            idTB.Text = employee.Id.ToString();
         }
 
         /// <summary>
@@ -385,6 +394,7 @@ namespace Theme12_OrganizationUI.ViewModel
             lastnameTB = page.FindName("lastnameTB") as TextBox;
             firstnameTB = page.FindName("firstnameTB") as TextBox;
             rateTB = page.FindName("rateTB") as TextBox;
+            idTB = page.FindName("idTB") as TextBox;
            
             //радиокнопки
             

@@ -45,6 +45,11 @@
                             <TextBlock Text="Дата рождения*:" Margin="5 0" VerticalAlignment="Center"/>
                             <DatePicker Name="birthDP" IsDropDownOpen="False" SelectedDateFormat="Short"/>
                         </StackPanel>
+                        <!-- Блок: ID -->
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.Column="1" Margin="5">
+                            <TextBlock Text="ID:" Margin="5 0" VerticalAlignment="Center"/>
+                            <TextBlock Name ="idTB"  Margin="5 0" VerticalAlignment="Center"/>
+                        </StackPanel>
                     </Grid>
 
                     <Grid>
