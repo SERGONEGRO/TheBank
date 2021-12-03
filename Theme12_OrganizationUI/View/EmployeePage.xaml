@@ -76,7 +76,7 @@
                                     <!-- Блок: Ставка -->
                                     <DockPanel Grid.Column="1" LastChildFill="true" Margin="5">
                                         <TextBlock Text="Ставка:" Margin="5 0" VerticalAlignment="Center"/>
-                                        <TextBox Name="rateTB" Margin="5 0" ToolTip="Заполняется для специалистов и персонала."/>
+                                        <TextBox Name="rateTB" Margin="5 0" ToolTip="Заполняется для специалистов и Интернов."/>
                                     </DockPanel>
                                 </Grid>
                                 <Grid>

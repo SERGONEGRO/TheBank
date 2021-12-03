@@ -13,7 +13,10 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <!-- Таблица -->
-            <ListView ItemsSource="{Binding Employees}" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Stretch" Grid.Row="0" Name="tableLV" HorizontalContentAlignment="Stretch">
+            <ListView ItemsSource="{Binding Employees}"
+                      IsSynchronizedWithCurrentItem="True" 
+                      HorizontalAlignment="Stretch" Grid.Row="0"
+                      Name="tableLV" HorizontalContentAlignment="Stretch">
                 <ListView.View>
                     <GridView>
                         <!-- Столбец: ФИО -->
@@ -31,8 +34,8 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                            <Run Text="{Binding LastName}"/>
-                            <Run Text="{Binding FirsName}"/>
+                            <Run Text="{Binding Lastname}"/>
+                            <Run Text="{Binding FirstName}"/>
                                 </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

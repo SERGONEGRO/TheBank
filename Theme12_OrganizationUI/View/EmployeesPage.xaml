@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Theme12_OrganizationUI.View"
         mc:Ignorable="d"
-        Title="EmployeesPage" Height="450" Width="800" Background="White">
+        Title="EmployeesPage" Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

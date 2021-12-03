@@ -60,7 +60,7 @@ namespace Theme12_OrganizationUI.Data
             JDepartments.Add(JDepartment);
 
             //помещаем элемент "департаменты" в корневой
-            Root["JDepartments"] = JDepartments;
+            Root["DEPARTMENTS"] = JDepartments;
 
             //сериализуем
             string json = Root.ToString();
@@ -75,7 +75,7 @@ namespace Theme12_OrganizationUI.Data
         private void FillDepartment(JObject targetObject, Department sourceDepartment)
         {
             //Элемент "название департамента"
-            targetObject["name"] = sourceDepartment.Name;
+            targetObject["NAME"] = sourceDepartment.Name;
 
             //дочерние департаменты 
             JArray JDepartments = new JArray();
@@ -92,7 +92,7 @@ namespace Theme12_OrganizationUI.Data
             }
 
             //элемент "департаменты"
-            targetObject["JDepartments"] = JDepartments;
+            targetObject["DEPARTMENTS"] = JDepartments;
 
             //сотрудники
             JArray JEmployees = new JArray();
@@ -109,7 +109,7 @@ namespace Theme12_OrganizationUI.Data
             }
 
             //элемент "сотрудники"
-            targetObject["JEmployees"] = JEmployees;
+            targetObject["EMPLOYEES"] = JEmployees;
 
         }
 
@@ -122,7 +122,7 @@ namespace Theme12_OrganizationUI.Data
             jEmployee["ID"] = employee.Id;
             jEmployee["FIRSTNAME"] = employee.FirstName;
             jEmployee["LASTNAME"] = employee.LastName;
-            jEmployee["DateOfBirth"] = employee.DateOfBirth;
+            jEmployee["DATEOFBIRTH"] = employee.DateOfBirth;
             jEmployee["DEPARTMENTNAME"] = employee.DepartmentName;
             jEmployee["CATHEGORY"] = employee.Cathegory.ToString();
             jEmployee["RATE"] = employee.Rate;
@@ -157,7 +157,7 @@ namespace Theme12_OrganizationUI.Data
                 string json = File.ReadAllText(path);
 
                 //выгружаем данные
-                var JDepartments = JObject.Parse(json)["JDepartments"].ToArray();
+                var JDepartments = JObject.Parse(json)["DEPARTMENTS"].ToArray();
 
                 //добавляем его в дерево департаментов
                 DepartmentsTree.Add(ParseDepartment(JDepartments[0], ""));
@@ -171,13 +171,13 @@ namespace Theme12_OrganizationUI.Data
         private Department ParseDepartment(JToken jDepartment, string parentName)
         {
             //получаем название департамента
-            string name = jDepartment["name"].ToString();
+            string name = jDepartment["NAME"].ToString();
 
             //создаем новый департамент
             Department dataDepartment = new Department(name, parentName);
 
             //выгружаем список департаментов
-            var JDepartments = jDepartment["JDepartments"].ToArray();
+            var JDepartments = jDepartment["DEPARTMENTS"].ToArray();
 
             //получаем все дочерние департаменты
             foreach (var item in JDepartments)
@@ -186,10 +186,10 @@ namespace Theme12_OrganizationUI.Data
             }
 
             //если в элементе есть список сотрудников (его нет в корневом) 
-            if (jDepartment["JEmployees"] != null)
+            if (jDepartment["EMPLOYEES"] != null)
             {
                 //выгружаем список сотрудников
-                var JEmployees = jDepartment["JEmployees"].ToArray();
+                var JEmployees = jDepartment["EMPLOYEES"].ToArray();
 
                 //получаем всех сотрудников
                 foreach (var item in JEmployees)
@@ -221,15 +221,15 @@ namespace Theme12_OrganizationUI.Data
             employee.Id = (int)jEmployee["ID"];
             employee.FirstName = jEmployee["FIRSTNAME"].ToString();
             employee.LastName = jEmployee["LASTNAME"].ToString();
-            employee.DateOfBirth = (DateTime)jEmployee["DateOfBirth"];
+            employee.DateOfBirth = (DateTime)jEmployee["DATEOFBIRTH"];
             employee.DepartmentName = jEmployee["DEPARTMENTNAME"].ToString();
             employee.Rate = (int)jEmployee["RATE"];
             employee.Hours = (int)jEmployee["HOURS"];
             //employee.ProjectsCount = (byte)jEmployee["PROJECTSCOUNT"];
            
             if ((string)jEmployee["CATHEGORY"] == "Менеджер") { employee.Cathegory = Cathegory.Менеджер; }
-            else if ((string)jEmployee["Cathegory"] == "Специалист") { employee.Cathegory = Cathegory.Специалист; }
-            else if ((string)jEmployee["Cathegory"] == "Интерн") { employee.Cathegory = Cathegory.Интерн; }
+            else if ((string)jEmployee["CATHEGORY"] == "Специалист") { employee.Cathegory = Cathegory.Специалист; }
+            else if ((string)jEmployee["CATHEGORY"] == "Интерн") { employee.Cathegory = Cathegory.Интерн; }
 
             
 

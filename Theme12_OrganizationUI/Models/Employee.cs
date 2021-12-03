@@ -24,7 +24,6 @@ namespace Theme12_OrganizationUI.Models
 
     public abstract class Employee
     {
-       
         #region Свойства
         /// <summary>
         /// id
@@ -52,6 +51,7 @@ namespace Theme12_OrganizationUI.Models
                 int n = DateTime.Now.Year - DateOfBirth.Year;
                 if (DateOfBirth.DayOfYear > DateTime.Now.DayOfYear)
                     --n;
+                if (n > 99) return 99;
                 return (byte) n;
             }
         }
@@ -91,38 +91,6 @@ namespace Theme12_OrganizationUI.Models
         /// </summary>
         public DateTime DateOfBirth { get; set; }
 
-
-
         #endregion
-
-        #region Методы
-
-
-
-        /// <summary>
-        /// Employee в JSON
-        /// </summary>
-        /// <returns></returns>
-        //public JObject SerializeEmployeeToJson()
-        //{
-        //    JObject jEmployee = new JObject
-        //    {
-        //        ["ID"] = Id,
-        //        ["FIRSTNAME"] = FirstName,
-        //        ["LASTNAME"] = LastName,
-        //        ["Age"] = Age,
-        //        ["Salary"] = GetWage(),
-        //        ["DEPARTMENTNAME"] = DepartmentName,
-        //        //["ProjectCount"] = ProjectsCount,
-        //        ["CATHEGORY"] = Cathegory.ToString()
-        //    };
-        //    return jEmployee;
-        //}
-
-        #endregion
-
-
-
-
     }
 }

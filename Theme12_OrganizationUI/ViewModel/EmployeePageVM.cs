@@ -56,11 +56,6 @@ namespace Theme12_OrganizationUI.ViewModel
         ComboBox departmentCB;
 
         /// <summary>
-        /// Граница блока: пол
-        /// </summary>
-        Border genderBorder;
-
-        /// <summary>
         /// Граница блока: департамент
         /// </summary>
         Border departmentBorder;
@@ -385,7 +380,6 @@ namespace Theme12_OrganizationUI.ViewModel
             debugBttn = page.FindName("debugBttn") as Button;
 
             //границы
-            genderBorder = page.FindName("genderBorder") as Border;
             departmentBorder = page.FindName("departmentBorder") as Border;
             positionCathegoryBorder = page.FindName("positionCathegoryBorder") as Border;
 
