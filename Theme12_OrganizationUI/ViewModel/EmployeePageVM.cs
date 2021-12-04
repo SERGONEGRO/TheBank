@@ -85,7 +85,7 @@ namespace Theme12_OrganizationUI.ViewModel
         /// <summary>
         /// Текстбокс: Id
         /// </summary>
-        TextBox idTB;
+        TextBlock idTB;
 
         #endregion
 
@@ -229,8 +229,11 @@ namespace Theme12_OrganizationUI.ViewModel
                                 //если создаем нового сотрудника
                                 if (isNew) DataWorker.AddEmployee(newEmployee);
                                 //если редактируем существующего сотрудника
-                                else DataWorker.EditEmployee(newEmployee);
-
+                                else
+                                {
+                                    newEmployee.Id = Convert.ToInt32(idTB.Text);
+                                    DataWorker.EditEmployee(newEmployee);
+                                }
                                 //выводим сообщение о результате
                                 if (isNew) MessageBox.Show("Новый сотрудник создан");
                                 else MessageBox.Show("Сотрудник успешно отредактирован");
@@ -345,7 +348,7 @@ namespace Theme12_OrganizationUI.ViewModel
                 newEmployee.Rate = Convert.ToInt32(rateTB.Text);
             }
             newEmployee.DepartmentName = (departmentCB.SelectedItem as Department).Name;
-            newEmployee.Id = Convert.ToInt32(idTB.Text);
+            //newEmployee.Id = Convert.ToInt32(idTB.Text);
 
         }
 
@@ -359,8 +362,9 @@ namespace Theme12_OrganizationUI.ViewModel
             //заполняем текстбоксы
             lastnameTB.Text = employee.LastName;
             firstnameTB.Text = employee.FirstName;
+            rateTB.Text = employee.Rate.ToString();
 
-            //заполняем радиокнопки: Категория должности (менеджер, специалист, персонал)
+            //заполняем радиокнопки: Категория должности (менеджер, специалист, Интерн)
             if (employee.Cathegory == Cathegory.Менеджер) { isManagerRB.IsChecked = true; }
             else if (employee.Cathegory == Cathegory.Специалист) { isSpecialistRB.IsChecked = true; }
             else if (employee.Cathegory == Cathegory.Интерн) { isInternRB.IsChecked = true; }
@@ -394,7 +398,7 @@ namespace Theme12_OrganizationUI.ViewModel
             lastnameTB = page.FindName("lastnameTB") as TextBox;
             firstnameTB = page.FindName("firstnameTB") as TextBox;
             rateTB = page.FindName("rateTB") as TextBox;
-            idTB = page.FindName("idTB") as TextBox;
+            idTB = page.FindName("idTB") as TextBlock;
            
             //радиокнопки
             

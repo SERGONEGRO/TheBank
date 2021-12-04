@@ -252,6 +252,8 @@ namespace Theme12_OrganizationUI.Models
             {
                 //находим сотрудника
                 Employee employee = db.DepartmentsTree[0].GetEmployee(newEmployee.Id);
+                //RemoveEmployee(employee);
+                //AddEmployee(newEmployee);
                 //меняем его на отредактированного
                 employee = newEmployee;
                 //сохраняем БД
