@@ -70,8 +70,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\ApplicationContext.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Deposit.cs" />
     <Compile Include="Models\EditableStaff.cs" />
     <Compile Include="Models\Payroll.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\DataWorker.cs" />
     <Compile Include="Models\Worker.cs" />
