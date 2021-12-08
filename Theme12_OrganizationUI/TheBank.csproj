@@ -89,8 +89,11 @@
     <Compile Include="ViewModel\SalaryPageVM.cs" />
     <Compile Include="ViewModel\TimeTrackingPageVM.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
-    <Compile Include="View\ClientsTablePage.xaml.cs">
-      <DependentUpon>ClientsTablePage.xaml</DependentUpon>
+    <Compile Include="View\ClientTablePage.xaml.cs">
+      <DependentUpon>ClientTablePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DepositsTablePage.xaml.cs">
+      <DependentUpon>DepositsTablePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReplaceEmployeeWindow.xaml.cs">
       <DependentUpon>ReplaceEmployeeWindow.xaml</DependentUpon>
@@ -101,7 +104,7 @@
     <Compile Include="View\TimeTrackingPage.xaml.cs">
       <DependentUpon>TimeTrackingPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\ClientsTablePage.xaml">
+    <Page Include="View\ClientTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DepartmentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DepositsTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

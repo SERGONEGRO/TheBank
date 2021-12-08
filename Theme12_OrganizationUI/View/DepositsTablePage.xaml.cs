@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Theme12_OrganizationUI.View
 {
     /// <summary>
-    /// Логика взаимодействия для ClientsTablePage.xaml
+    /// Логика взаимодействия для DepositsTablePage.xaml
     /// </summary>
-    public partial class ClientsTablePage : Page
+    public partial class DepositsTablePage : Page
     {
-        public ClientsTablePage()
+        public DepositsTablePage()
         {
             InitializeComponent();
         }
