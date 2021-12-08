@@ -10,21 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TheBank.ViewModel;
 
-namespace TheBank.View
+namespace Theme12_OrganizationUI.View
 {
     /// <summary>
-    /// Логика взаимодействия для EmployeesPage.xaml
+    /// Логика взаимодействия для ClientsTablePage.xaml
     /// </summary>
-    public partial class EmployeesPage : Page
+    public partial class ClientsTablePage : Page
     {
-        public EmployeesPage()
+        public ClientsTablePage()
         {
             InitializeComponent();
-            //подключаем VM
-            DataContext = new EmployeesPageVM(this);
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Theme12_OrganizationUI.ViewModel
+namespace TheBank.ViewModel
 {
     public class ViewModel : INotifyPropertyChanged
     {

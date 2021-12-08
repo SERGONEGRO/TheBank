@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Theme12_OrganizationUI.ViewModel;
+using TheBank.ViewModel;
 
-namespace Theme12_OrganizationUI.View
+namespace TheBank.View
 {
     /// <summary>
     /// Логика взаимодействия для SalaryPage.xaml

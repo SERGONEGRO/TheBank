@@ -1,10 +1,10 @@
-﻿using Theme12_OrganizationUI.Models;
-using Theme12_OrganizationUI.View;
+﻿using TheBank.Models;
+using TheBank.View;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Theme12_OrganizationUI.ViewModel
+namespace TheBank.ViewModel
 {
     class DepartmentsPageVM : ViewModel
     {

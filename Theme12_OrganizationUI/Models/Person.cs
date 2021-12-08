@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Theme12_OrganizationUI.Models
+namespace TheBank.Models
 {
     public abstract class Person
     {

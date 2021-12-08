@@ -1,7 +1,7 @@
-﻿<Application x:Class="Theme12_OrganizationUI.App"
+﻿<Application x:Class="TheBank.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Theme12_OrganizationUI"
+             xmlns:local="clr-namespace:TheBank"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
          

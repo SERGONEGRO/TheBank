@@ -1,7 +1,7 @@
-﻿using Theme12_OrganizationUI.ViewModel;
+﻿using TheBank.ViewModel;
 using System.Windows.Controls;
 
-namespace Theme12_OrganizationUI.View
+namespace TheBank.View
 {
     /// <summary>
     /// Логика взаимодействия для TimeTrackingPage.xaml

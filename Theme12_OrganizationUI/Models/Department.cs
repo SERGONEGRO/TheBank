@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Theme12_OrganizationUI.Models
+namespace TheBank.Models
 {
     /// <summary>
     /// Департамент

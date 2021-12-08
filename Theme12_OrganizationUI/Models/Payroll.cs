@@ -1,4 +1,4 @@
-﻿namespace Theme12_OrganizationUI.Models
+﻿namespace TheBank.Models
 {
     class Payroll
     {

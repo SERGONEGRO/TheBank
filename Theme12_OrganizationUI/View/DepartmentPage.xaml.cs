@@ -1,8 +1,8 @@
-﻿using Theme12_OrganizationUI.Models;
-using Theme12_OrganizationUI.ViewModel;
+﻿using TheBank.Models;
+using TheBank.ViewModel;
 using System.Windows.Controls;
 
-namespace Theme12_OrganizationUI.View
+namespace TheBank.View
 {
     /// <summary>
     /// Логика взаимодействия для DepartmentPage.xaml

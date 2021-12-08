@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Theme12_OrganizationUI.ViewModel;
+using TheBank.ViewModel;
 
-namespace Theme12_OrganizationUI.View
+namespace TheBank.View
 {//https://www.wpf-tutorial.com/ru/85/элемент-управления-treeview/treeview-привязка-данных-и-несколько-шаблонов/
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

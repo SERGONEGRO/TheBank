@@ -1,4 +1,4 @@
-﻿using Theme12_OrganizationUI.Models;
+﻿using TheBank.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 
-namespace Theme12_OrganizationUI.Data
+namespace TheBank.Data
 {
     class ApplicationContext : DbContext
     {

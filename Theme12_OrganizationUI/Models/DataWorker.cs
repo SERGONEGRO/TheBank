@@ -1,11 +1,11 @@
-﻿using Theme12_OrganizationUI.Data;
+﻿using TheBank.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
-namespace Theme12_OrganizationUI.Models
+namespace TheBank.Models
 {
     class DataWorker
     {

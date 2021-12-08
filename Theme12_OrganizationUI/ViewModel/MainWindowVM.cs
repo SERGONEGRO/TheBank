@@ -1,9 +1,9 @@
-﻿using Theme12_OrganizationUI.Models;
-using Theme12_OrganizationUI.View;
+﻿using TheBank.Models;
+using TheBank.View;
 using System;
 using System.Windows;
 
-namespace Theme12_OrganizationUI.ViewModel
+namespace TheBank.ViewModel
 {
     class MainWindowVM : ViewModel
     {

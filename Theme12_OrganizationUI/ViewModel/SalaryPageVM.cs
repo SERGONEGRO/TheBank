@@ -1,7 +1,7 @@
-﻿using Theme12_OrganizationUI.Models;
+﻿using TheBank.Models;
 using System.Collections.ObjectModel;
 
-namespace Theme12_OrganizationUI.ViewModel
+namespace TheBank.ViewModel
 {
     class SalaryPageVM
     {

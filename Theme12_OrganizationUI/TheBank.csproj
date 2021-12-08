@@ -73,6 +73,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Deposit.cs" />
     <Compile Include="Models\EditableStaff.cs" />
+    <Compile Include="Models\Investor.cs" />
     <Compile Include="Models\Payroll.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\RelayCommand.cs" />
@@ -88,6 +89,9 @@
     <Compile Include="ViewModel\SalaryPageVM.cs" />
     <Compile Include="ViewModel\TimeTrackingPageVM.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="View\ClientsTablePage.xaml.cs">
+      <DependentUpon>ClientsTablePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ReplaceEmployeeWindow.xaml.cs">
       <DependentUpon>ReplaceEmployeeWindow.xaml</DependentUpon>
     </Compile>
@@ -97,6 +101,10 @@
     <Compile Include="View\TimeTrackingPage.xaml.cs">
       <DependentUpon>TimeTrackingPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ClientsTablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DepartmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

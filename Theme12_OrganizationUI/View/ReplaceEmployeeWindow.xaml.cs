@@ -11,10 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Theme12_OrganizationUI.ViewModel;
-using Theme12_OrganizationUI.Models;
+using TheBank.ViewModel;
+using TheBank.Models;
 
-namespace Theme12_OrganizationUI.View
+namespace TheBank.View
 {
     /// <summary>
     /// Логика взаимодействия для ReplaceEmployeeWindow.xaml
