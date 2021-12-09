@@ -19,9 +19,24 @@ namespace TheBank.Models
         public Person Investor { get; set; }
 
         /// <summary>
-        /// Сумма вклада
+        /// Процент вклада
         /// </summary>
-        public int Summ { get; set; }
+        public double DepositPercent { get; set; }
+
+        /// <summary>
+        /// Начальная сумма вклада
+        /// </summary>
+        public int StartSum { get; set; }
+
+        /// <summary>
+        /// Есть ли капитализация процентов?
+        /// </summary>
+        public bool IsCapitalized { get; set; }
+
+        /// <summary>
+        /// Текущая сумма
+        /// </summary>
+        public double CurrentSum { get; set; }
         
         /// <summary>
         /// Дата начала вклада
