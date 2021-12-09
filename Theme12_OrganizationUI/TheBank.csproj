@@ -73,7 +73,6 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Deposit.cs" />
     <Compile Include="Models\EditableStaff.cs" />
-    <Compile Include="Models\Investor.cs" />
     <Compile Include="Models\Payroll.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\RelayCommand.cs" />

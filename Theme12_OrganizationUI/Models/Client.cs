@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheBank.Models
 {
-    class Client : Person
+    public class Client : Person
     {
         /// <summary>
         /// id

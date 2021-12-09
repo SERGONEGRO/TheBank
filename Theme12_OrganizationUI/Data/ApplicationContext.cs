@@ -12,12 +12,22 @@ namespace TheBank.Data
     class ApplicationContext : DbContext
     {
         //путь к файлу сохранения "Департаменты"
-        private readonly string path = @"Departments.json";
+        private readonly string path = @"TheBANK.json";
 
         /// <summary>
         /// Дерево департаментов
         /// </summary>
         public ObservableCollection<Department> DepartmentsTree { get; set; }
+
+        /// <summary>
+        /// список клиентов
+        /// </summary>
+        public List<Client> ClientsList { get; set; }
+
+        /// <summary>
+        /// список вкладов
+        /// </summary>
+        public List<Deposit> DepositList { get; set; }
 
         /// <summary>
         /// Конструктор
@@ -26,6 +36,10 @@ namespace TheBank.Data
         {
             //инициализируем дерево департаментов
             DepartmentsTree = new ObservableCollection<Department>();
+            //инициализируем дерево клиентов
+            ClientsList = new List<Client>();
+            //инициализируем дерево вкладов
+            DepositList = new List<Deposit>();
 
             //загружаем БД
             Load();
@@ -47,20 +61,29 @@ namespace TheBank.Data
             //корневой элемент
             JObject Root = new JObject();
 
+                                /*----департменты-------*/
             //дочерние департаменты 
             JArray JDepartments = new JArray();
-
             //создаем новый объект-департамент
             JObject JDepartment = new JObject();
-
             //заполняем его
             FillDepartment(JDepartment, DepartmentsTree[0]);
-
             //добавляем в массив
             JDepartments.Add(JDepartment);
 
+                                /*--------Клиенты------*/
+            JArray JClients = new JArray();
+            //создаем новый объект-клиент
+            //JObject JClient = new JObject();
+            //заполняем его
+            FillClients(JClients, ClientsList);
+            //добавляем в массив
+            //JClients.Add(JClient);
+
             //помещаем элемент "департаменты" в корневой
             Root["DEPARTMENTS"] = JDepartments;
+            //помещаем элемент "Клиенты" в корневой
+            Root["CLIENTS"] = JClients;
 
             //сериализуем
             string json = Root.ToString();
@@ -128,8 +151,34 @@ namespace TheBank.Data
             jEmployee["RATE"] = employee.Rate;
             jEmployee["HOURS"] = employee.Hours;
             //jEmployee["PROJECTSCOUNT"] = employee.ProjectsCount;
-            
+        }
 
+        /// <summary>
+        /// Метод заполнения массива клиентов
+        /// </summary>
+        private void FillClients(JArray JClients, List<Client> clients)
+        {
+            for (int i = 0; i < clients.Count; i++)
+            {
+                //создаем новый объект-клиент
+                JObject JClient = new JObject();
+                //заполняем его
+                FillClient(JClient, clients[i]);
+                //добавляем в массив
+                JClients.Add(JClient);
+            }
+        }
+        /// <summary>
+        /// Метод заполнения одного Клиента
+        /// </summary>
+        private void FillClient(JObject jClient, Client client)
+        {
+            //заполняем все
+            jClient["ID"] = client.Id;
+            jClient["FIRSTNAME"] = client.FirstName;
+            jClient["LASTNAME"] = client.LastName;
+            jClient["DATEOFBIRTH"] = client.DateOfBirth;
+            jClient["ISVIP"] = client.IsVIP;
         }
         #endregion
 
