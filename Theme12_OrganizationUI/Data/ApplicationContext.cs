@@ -192,7 +192,7 @@ namespace TheBank.Data
             if (!File.Exists(path))
             {
                 //создаем новый департамент
-                Department newDepartment = new Department("Организация");
+                Department newDepartment = new Department("The Negro Bank");
 
                 //добавляем его в дерево департаментов
                 DepartmentsTree.Add(newDepartment);
@@ -207,11 +207,37 @@ namespace TheBank.Data
 
                 //выгружаем данные
                 var JDepartments = JObject.Parse(json)["DEPARTMENTS"].ToArray();
-
                 //добавляем его в дерево департаментов
                 DepartmentsTree.Add(ParseDepartment(JDepartments[0], ""));
+
+                //выгружаем клиентов
+                var JClients = JObject.Parse(json)["CLIENTS"].ToArray();
+                foreach (var item in JClients)
+                {
+                    ClientsList.Add(ParseClient(item));
+                }
             }
 
+        }
+
+        /// <summary>
+        /// Выгружает клиента из JSON
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private Client ParseClient(JToken jclient)
+        {
+            //объявляем нового сотрудника
+            Client client = new Client();
+            //заполняем его поля
+            client.Id = (int)jclient["ID"];
+            client.FirstName = jclient["FIRSTNAME"].ToString();
+            client.LastName = jclient["LASTNAME"].ToString();
+            client.DateOfBirth = (DateTime)jclient["DATEOFBIRTH"];
+
+            if ((string)jclient["ISVIP"] == "true")  client.IsVIP = true;  else client.IsVIP = false;
+            
+            return client;
         }
 
         /// <summary>
@@ -274,13 +300,10 @@ namespace TheBank.Data
             employee.DepartmentName = jEmployee["DEPARTMENTNAME"].ToString();
             employee.Rate = (int)jEmployee["RATE"];
             employee.Hours = (int)jEmployee["HOURS"];
-            //employee.ProjectsCount = (byte)jEmployee["PROJECTSCOUNT"];
            
             if ((string)jEmployee["CATHEGORY"] == "Менеджер") { employee.Cathegory = Cathegory.Менеджер; }
             else if ((string)jEmployee["CATHEGORY"] == "Специалист") { employee.Cathegory = Cathegory.Специалист; }
             else if ((string)jEmployee["CATHEGORY"] == "Интерн") { employee.Cathegory = Cathegory.Интерн; }
-
-            
 
             return employee;
         }

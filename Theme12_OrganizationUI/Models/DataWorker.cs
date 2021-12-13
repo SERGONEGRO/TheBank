@@ -134,6 +134,25 @@ namespace TheBank.Models
                 }
             }
         }
+
+        /// <summary>
+        /// Возвращает всех клиентов
+        /// </summary>
+        /// <returns></returns>
+        internal static ObservableCollection<Client> GetAllClients()
+        {
+            //обращаемся к бд
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                ObservableCollection<Client> clients = new ObservableCollection<Client>();
+                foreach (var item in db.ClientsList)
+                {
+                    clients.Add(item);
+                }
+                return clients;
+            }
+        }
+
         #endregion
 
         #region  МЕТОДЫ РЕДАКТИРОВАНИЯ

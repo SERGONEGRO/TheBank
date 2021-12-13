@@ -78,6 +78,7 @@
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\DataWorker.cs" />
     <Compile Include="Models\Worker.cs" />
+    <Compile Include="ViewModel\ClientTablePageVM.cs" />
     <Compile Include="ViewModel\DepartmentPageVM.cs" />
     <Compile Include="ViewModel\DepartmentsPageVM.cs" />
     <Compile Include="ViewModel\EmployeePageVM.cs" />

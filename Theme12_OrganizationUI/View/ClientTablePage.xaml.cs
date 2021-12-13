@@ -23,7 +23,9 @@ namespace TheBank.View
     {
         public ClientTablePage()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            //подключаем VM
+            DataContext = new ClientTablePageVM(this);
         }
     }
 }
