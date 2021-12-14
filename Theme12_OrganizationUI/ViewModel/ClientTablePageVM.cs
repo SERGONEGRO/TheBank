@@ -19,7 +19,7 @@ namespace TheBank.ViewModel
             Clients = DataWorker.GetAllClients();
             Clients.Add(new Client());
             clients[0].Id = 1;   //test
-            //tableLV = page.FindName("tableLV") as ListView;
+            tableLV = page.FindName("tableLV") as ListView;
 
         }
 
@@ -92,11 +92,39 @@ namespace TheBank.ViewModel
                         //пытаемся удалить его
                         if (DataWorker.RemoveClient(client))
                         {
-                            MessageBox.Show("Сотрудник успешно удален");
+                            MessageBox.Show("Клиент успешно аннигилирован");
                         }
                     });
                 }
                 return removeClientCommand;
+            }
+        }
+
+        /// <summary>
+        /// Редактировать клиента (команда)
+        /// </summary>
+        RelayCommand editClientCommand;
+
+        /// <summary>
+        /// Редактировать клиента (свойство)
+        /// </summary>
+        public RelayCommand EditClientCommand
+        {
+            get
+            {
+                //если поле не инициализировано - инициализируем
+                if (editClientCommand == null)
+                {
+                    editClientCommand = new RelayCommand(obj =>
+                    {
+                        if (tableLV.SelectedItem != null)
+                        {
+                            Page page = new ClientPage(tableLV.SelectedItem as Client);
+                            CurrentPage = page;
+                        }
+                    });
+                }
+                return editClientCommand;
             }
         }
         #endregion
