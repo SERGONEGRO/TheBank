@@ -110,7 +110,7 @@ namespace TheBank.Models
         /// Находит и возвращает незанятый табельный номер для сотрудника
         /// </summary>
         /// <returns></returns>
-        internal static int GetFreeNumber()
+        internal static int GetFreeNumberEmployee()
         {
             //обращаемся к бд
             using (ApplicationContext db = new ApplicationContext())
@@ -118,6 +118,7 @@ namespace TheBank.Models
                 //получаем список сотрудников
                 ObservableCollection<Employee> employees = db.DepartmentsTree[0].GetEmployees();
                 //если список пуст, возвращаем единичку
+                
                 if (employees.Count == 0)
                 {
                     return 1;
@@ -131,6 +132,36 @@ namespace TheBank.Models
                                           select u;
                     //возвращаем последний номер +1
                     return sortedEmployees.Last().Id + 1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Находит и возвращает незанятый табельный номер для клиента
+        /// </summary>
+        /// <returns></returns>
+        internal static int GetFreeNumberClient()
+        {
+            //обращаемся к бд
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                //получаем список сотрудников
+                ObservableCollection<Client> clients = GetAllClients();
+                //если список пуст, возвращаем единичку
+
+                if (clients.Count == 0)
+                {
+                    return 1;
+                }
+                //иначе 
+                else
+                {
+                    //сортируем его по табельному номеру
+                    var sortedClients = from u in clients
+                                          orderby u.Id
+                                          select u;
+                    //возвращаем последний номер +1
+                    return sortedClients.Last().Id + 1;
                 }
             }
         }
@@ -285,6 +316,26 @@ namespace TheBank.Models
                 DBChanged();
             }
         }
+        /// <summary>
+        /// Редактирует клиента
+        /// </summary>
+        /// <param name="newEmployee"></param>
+        internal static void EditClient(Client newClient)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                //находим клиента
+                Client client = db.ClientsList.Find(x => x.Id == newClient.Id);
+                //удаляем клиента
+                db.ClientsList.Remove(client);
+                //добавляем в него клиента
+                db.ClientsList.Add(newClient);
+                //сохраняем БД
+                db.Save();
+                //инициируем событие "БД изменилась"
+                DBChanged();
+            }
+        }
         #endregion
 
         #region МЕТОДЫ ДОБАВЛЕНИЯ
@@ -331,9 +382,29 @@ namespace TheBank.Models
                 //находим родительский департамент
                 Department parent = db.DepartmentsTree[0].GetDepartment(newEmployee.DepartmentName);
                 //назначаем сотруднику персональный номер
-                newEmployee.Id = GetFreeNumber();
+                newEmployee.Id = GetFreeNumberEmployee();
                 //добавляем в него сотрудника
                 parent.AddEmployee(newEmployee);
+                //сохраняем БД
+                db.Save();
+                //инициируем событие "БД изменилась"
+                DBChanged();
+            }
+        }
+
+        /// <summary>
+        /// Добавляет нового клиента
+        /// </summary>
+        /// <param name="newEmployee"></param>
+        internal static void AddClient(Client newClient)
+        {
+            //обращаемся к бд
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                //назначаем сотруднику персональный номер
+                newClient.Id = GetFreeNumberClient();
+                //добавляем в него сотрудника
+                db.ClientsList.Add(newClient);
                 //сохраняем БД
                 db.Save();
                 //инициируем событие "БД изменилась"
@@ -401,6 +472,24 @@ namespace TheBank.Models
                 Department parent = db.DepartmentsTree[0].GetDepartment(employee.DepartmentName);
                 //удаляем из него сотрудника
                 parent.RemoveEmployee(employee);
+                //сохраняем БД
+                db.Save();
+                //инициируем событие "БД изменилась"
+                DBChanged();
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Удаляет указанного клиента
+        /// </summary>
+        /// <returns></returns>
+        internal static bool RemoveClient(Client client)
+        {
+            //обращаемся к бд
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.ClientsList.Remove(client);
                 //сохраняем БД
                 db.Save();
                 //инициируем событие "БД изменилась"

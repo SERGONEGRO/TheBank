@@ -16,7 +16,7 @@ namespace TheBank.Models
         /// <summary>
         /// Вкладчик
         /// </summary>
-        public Person Investor { get; set; }
+        public Client Client { get; set; }
 
         /// <summary>
         /// Процент вклада

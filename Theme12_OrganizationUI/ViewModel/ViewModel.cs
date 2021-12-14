@@ -17,7 +17,10 @@ namespace TheBank.ViewModel
         /// <param name="propertyName"></param>
         public void NotifyPropertyChanged(string propertyName)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

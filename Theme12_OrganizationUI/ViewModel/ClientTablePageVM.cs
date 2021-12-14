@@ -15,9 +15,12 @@ namespace TheBank.ViewModel
     {
         public ClientTablePageVM(Page page)
         {
-            Clients = DataWorker.GetAllClients();
-            //tableLV = page.FindName("tableLV") as ListView;
             
+            Clients = DataWorker.GetAllClients();
+            Clients.Add(new Client());
+            clients[0].Id = 1;   //test
+            //tableLV = page.FindName("tableLV") as ListView;
+
         }
 
         /// <summary>
@@ -66,7 +69,38 @@ namespace TheBank.ViewModel
                 NotifyPropertyChanged("Clients");
             }
         }
+        #region Команды
+        /// <summary>
+        /// Удалить Клиента (команда)
+        /// </summary>
+        RelayCommand removeClientCommand;
+
+        /// <summary>
+        /// Удалить Клиента (свойство)
+        /// </summary>
+        public RelayCommand RemoveClientCommand
+        {
+            get
+            {
+                //если поле не инициализировано - инициализируем
+                if (removeClientCommand == null)
+                {
+                    removeClientCommand = new RelayCommand(obj =>
+                    {
+                        //получаем выделенного Клиента
+                        Client client = tableLV.SelectedItem as Client;
+                        //пытаемся удалить его
+                        if (DataWorker.RemoveClient(client))
+                        {
+                            MessageBox.Show("Сотрудник успешно удален");
+                        }
+                    });
+                }
+                return removeClientCommand;
+            }
+        }
+        #endregion
     }
 
-    
+
 }

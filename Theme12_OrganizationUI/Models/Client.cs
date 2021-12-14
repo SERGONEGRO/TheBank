@@ -17,5 +17,12 @@ namespace TheBank.Models
         /// VIP?
         /// </summary>
         public bool IsVIP { get; set; }
+
+        //public Client(string firstname,string lastname, string dateOfBirth, int id, bool isVip)
+        //{
+        //    FirstName = firstname;
+        //    LastName = lastname;
+        //    DateOfBirth = (DateTime)dateOfBirth;
+        //}
     }
 }
