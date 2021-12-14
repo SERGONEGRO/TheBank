@@ -23,6 +23,16 @@ namespace TheBank.ViewModel
         public EmployeesPage EmployeesPage { get; set; }
 
         /// <summary>
+        /// Страница "Клиенты"
+        /// </summary>
+        public ClientTablePage ClientTablePage { get; set; }
+
+        /// <summary>
+        /// Страница "вклады"
+        /// </summary>
+       // public EmployeesPage EmployeesPage { get; set; }
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="mainWindow"></param>
@@ -31,6 +41,7 @@ namespace TheBank.ViewModel
             window = mainWindow;
             DepartmentsPage = new DepartmentsPage();
             EmployeesPage = new EmployeesPage();
+            ClientTablePage = new ClientTablePage();
         }
     }
 }

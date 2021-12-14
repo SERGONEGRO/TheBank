@@ -16,7 +16,7 @@
         <!-- Вкладка "Клиенты" -->
         <TabItem Header="Клиенты">
             <!-- Фрейм -->
-            <Frame Content="{Binding ClientsPage}" NavigationUIVisibility="Hidden"/>
+            <Frame Content="{Binding ClientTablePage}" NavigationUIVisibility="Hidden"/>
         </TabItem>
         <!-- Вкладка "Департаменты" -->
         <TabItem Header="Департаменты">

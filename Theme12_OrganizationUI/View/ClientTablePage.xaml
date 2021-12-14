@@ -13,7 +13,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <!-- Таблица -->
-        <ListView ItemsSource="{Binding ClientList}"
+        <ListView ItemsSource="{Binding Clients}"
                       IsSynchronizedWithCurrentItem="True" 
                       HorizontalAlignment="Stretch" Grid.Row="0"
                       Name="tableLV" HorizontalContentAlignment="Stretch">
