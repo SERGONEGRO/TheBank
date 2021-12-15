@@ -78,6 +78,7 @@
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\DataWorker.cs" />
     <Compile Include="Models\Worker.cs" />
+    <Compile Include="ViewModel\ClientPageVM.cs" />
     <Compile Include="ViewModel\ClientTablePageVM.cs" />
     <Compile Include="ViewModel\DepartmentPageVM.cs" />
     <Compile Include="ViewModel\DepartmentsPageVM.cs" />
@@ -89,6 +90,9 @@
     <Compile Include="ViewModel\SalaryPageVM.cs" />
     <Compile Include="ViewModel\TimeTrackingPageVM.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="View\ClientPage.xaml.cs">
+      <DependentUpon>ClientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ClientTablePage.xaml.cs">
       <DependentUpon>ClientTablePage.xaml</DependentUpon>
     </Compile>
@@ -104,6 +108,10 @@
     <Compile Include="View\TimeTrackingPage.xaml.cs">
       <DependentUpon>TimeTrackingPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ClientTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -17,8 +17,8 @@ namespace TheBank.ViewModel
         {
             
             Clients = DataWorker.GetAllClients();
-            Clients.Add(new Client());
-            clients[0].Id = 1;   //test
+            //Clients.Add(new Client());
+            //clients[0].Id = 1;   //test
             tableLV = page.FindName("tableLV") as ListView;
 
         }
@@ -125,6 +125,30 @@ namespace TheBank.ViewModel
                     });
                 }
                 return editClientCommand;
+            }
+        }
+
+        /// <summary>
+        /// Добавить клиента (команда)
+        /// </summary>
+        RelayCommand addClientCommand;
+
+        /// <summary>
+        /// Добавить клиента (свойство)
+        /// </summary>
+        public RelayCommand AddClientCommand
+        {
+            get
+            {
+                //если поле не инициализировано - инициализируем
+                if (addClientCommand == null)
+                {
+                    addClientCommand = new RelayCommand(obj =>
+                    {
+                        CurrentPage = new ClientPage();
+                    });
+                }
+                return addClientCommand;
             }
         }
         #endregion

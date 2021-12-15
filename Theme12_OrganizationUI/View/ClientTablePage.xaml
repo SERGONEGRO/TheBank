@@ -70,9 +70,9 @@
         </ListView>
         <!-- Кнопки -->
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5">
-            <Button Content="Добавить Клиента" Margin="5" Padding="5 3" Command="{Binding AddClientCommandCommand}"/>
+            <Button Content="Добавить Клиента" Margin="5" Padding="5 3" Command="{Binding AddClientCommand}"/>
             <Button Content="Редактировать Клиента" Margin="5" Padding="5 3" Command="{Binding EditClientCommand}"/>
-            <Button Content="Удалить Клиента" Margin="5" Padding="5 3" Command="{Binding DeleteClientCommand}"/>
+            <Button Content="Удалить Клиента" Margin="5" Padding="5 3" Command="{Binding RemoveClientCommand}"/>
         </StackPanel>
 
     </Grid>
