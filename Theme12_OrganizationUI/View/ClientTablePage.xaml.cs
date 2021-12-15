@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TheBank.ViewModel;
+using TheBank.Models;
+using System.Collections.ObjectModel;
 
 namespace TheBank.View
 {
@@ -26,6 +28,18 @@ namespace TheBank.View
             InitializeComponent();
             //подключаем VM
             DataContext = new ClientTablePageVM(this);
+        }
+
+        /// <summary>
+        /// Конструктор для обновления данных
+        /// </summary>
+        public ClientTablePage(ObservableCollection<Client> clients)
+        {
+            InitializeComponent();
+
+            //подключаем VM
+            DataContext = new ClientTablePageVM(this, clients);
+
         }
     }
 }

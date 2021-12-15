@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       Background="SkyBlue"
       Title="Client">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -90,10 +89,10 @@
         <!-- Блок: Кнопки подтверждения-->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <!-- Кнопка: сохранить -->
-            <Button Content="Сохранить" Margin="5" Padding="5 3" Command="{Binding SaveEmployeeCommand}"/>
+            <Button Content="Сохранить" Margin="5" Padding="5 3" Command="{Binding SaveClientCommand}"/>
             <!-- Кнопка: Дебаг -->
-            <Button Content="Заполнить рандомно обязательные поля" Padding="5 3" Margin="5" Command="{Binding RandomEmployeeCommand}" 
-                    ToolTip="Департамент, ставка и должность заполняются вручную!" Name="debugBttn"/>
+            <Button Content="Заполнить рандомно обязательные поля" Padding="5 3" Margin="5" Command="{Binding RandomClientCommand}" 
+                    ToolTip="Тултип??? втф?" Name="debugBttn"/>
         </StackPanel>
     </Grid>
 </Page>

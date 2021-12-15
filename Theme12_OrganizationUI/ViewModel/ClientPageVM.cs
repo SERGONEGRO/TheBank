@@ -19,18 +19,20 @@ namespace TheBank.ViewModel
         /// <param name="page"></param>
         public ClientPageVM(Page page)
         {
-            this.page = page;
+            View = page;
             isNew = true;
             Initialize();
-        }
 
-        /// <summary>
-        /// Конструктор (существующий клиент)
-        /// </summary>
-        /// <param name="page"></param>
-        public ClientPageVM(Page page, Client client)
+        }
+       
+
+            /// <summary>
+            /// Конструктор (существующий клиент)
+            /// </summary>
+            /// <param name="page"></param>
+            public ClientPageVM(Page page, Client client)
         {
-            this.page = page;
+            View = page;
             isNew = false;
             this.client = client;
             FillViewsAndSources();
@@ -102,7 +104,7 @@ namespace TheBank.ViewModel
         /// <summary>
         /// Вьюшка
         /// </summary>
-        readonly Page page;
+        public Page View { get; set; }
 
         /// <summary>
         /// Новый клиент
@@ -213,8 +215,8 @@ namespace TheBank.ViewModel
         /// </summary>
         private void FillRandom()
         {
-            lastnameTB.Text = GenerateString("Иванов", "Петров", "Сидоров", "Мухоморов", "Коняев", "Афанасьев", "Самсонов", "Кузякин");
-            firstnameTB.Text = GenerateString("Иван", "Владислав", "Кирилл", "Арсений", "Семён", "Матвей", "Александр", "Степан");
+            lastnameTB.Text = GenerateString("Иванов", "Петров", "Сидоров", "Мухоморов", "Коняев", "Афанасьев", "Самсонов", "Кузякин","Обоев", "Помоев", "Изгоев");
+            firstnameTB.Text = GenerateString("Иван", "Владислав", "Кирилл", "Арсений", "Семён", "Матвей", "Александр", "Степан", "Бидон", "Рулон", "Затон");
             birthDP.SelectedDate = GenerateDate();
         }
 
@@ -304,26 +306,26 @@ namespace TheBank.ViewModel
         private void Initialize()
         {
             //текстблок
-            messageTB = page.FindName("messageTB") as TextBlock;
+            messageTB = View.FindName("messageTB") as TextBlock;
 
             //кнопка
-            debugBttn = page.FindName("debugBttn") as Button;
+            debugBttn = View.FindName("debugBttn") as Button;
 
             //границы
-            isVIPBorder = page.FindName("isVIPBorder") as Border;
+            isVIPBorder = View.FindName("isVIPBorder") as Border;
             
             //текстбоксы
-            lastnameTB = page.FindName("lastnameTB") as TextBox;
-            firstnameTB = page.FindName("firstnameTB") as TextBox;
-            idTB = page.FindName("idTB") as TextBlock;
+            lastnameTB = View.FindName("lastnameTB") as TextBox;
+            firstnameTB = View.FindName("firstnameTB") as TextBox;
+            idTB = View.FindName("idTB") as TextBlock;
 
             //радиокнопки
 
-            VIP = page.FindName("VIP") as RadioButton;
-            NOVIP = page.FindName("NOVIP") as RadioButton;
+            VIP = View.FindName("VIP") as RadioButton;
+            NOVIP = View.FindName("NOVIP") as RadioButton;
            
             //даты
-            birthDP = page.FindName("birthDP") as DatePicker;
+            birthDP = View.FindName("birthDP") as DatePicker;
 
         }
 

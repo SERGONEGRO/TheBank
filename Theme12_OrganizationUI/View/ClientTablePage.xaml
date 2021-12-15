@@ -74,6 +74,6 @@
             <Button Content="Редактировать Клиента" Margin="5" Padding="5 3" Command="{Binding EditClientCommand}"/>
             <Button Content="Удалить Клиента" Margin="5" Padding="5 3" Command="{Binding RemoveClientCommand}"/>
         </StackPanel>
-
+        <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" Grid.Row="2"/>
     </Grid>
 </Page>

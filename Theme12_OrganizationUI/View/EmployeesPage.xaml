@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <!-- Кнопки -->
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5">
-            <Button Content="Все сотрудники" Margin="5" Padding="5 3" Command="{Binding ShowTableCommand}"/>
+            <Button Content="Все сотрудники" Margin="5" Padding="5 3" Command="{Binding ShowTableCommand}" Click="Button_Click"/>
             <Button Content="Добавить сотрудника" Margin="5" Padding="5 3" Command="{Binding AddEmployeeCommand}"/>
             <Button Content="Учет рабочего времени персонала" Margin="5" Padding="5 3" Command="{Binding ShowTimeTrackingPageCommand}" ToolTip="Только для сотрудников с почасовой оплатой труда"/>
             <Button Content="Сводка по з/п" Margin="5" Padding="5 3" Command="{Binding ShowSalaryPageCommand}"/>

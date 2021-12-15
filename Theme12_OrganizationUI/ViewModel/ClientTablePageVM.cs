@@ -21,6 +21,36 @@ namespace TheBank.ViewModel
             //clients[0].Id = 1;   //test
             tableLV = page.FindName("tableLV") as ListView;
 
+            //подписываемся на событие "БД обновилась"
+            DataWorker.DBChanged += UpdateClients;
+
+        }
+
+        /// <summary>
+        /// Конструктор (для показа инфы о существующих клиентах)
+        /// </summary>
+        public ClientTablePageVM(Page page, ObservableCollection<Client> clients)
+        {
+            this.Clients = clients;
+            //isNew = false;
+            //FillView(page);
+        }
+
+        //private void FillView(Page page)
+        //{
+        //    Clients = 
+        //}
+
+        /// <summary>
+        /// Обновляем отображение клиентов
+        /// </summary>
+        /// <returns></returns>
+        private void UpdateClients()
+        {
+            //брем новое дерево из БД
+            Clients = DataWorker.GetAllClients();
+            //во фрейме справа показываем корневой департамент
+            CurrentPage = new ClientTablePage(Clients);
         }
 
         /// <summary>

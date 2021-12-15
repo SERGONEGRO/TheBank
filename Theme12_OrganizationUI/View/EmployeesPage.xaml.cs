@@ -26,5 +26,10 @@ namespace TheBank.View
             //подключаем VM
             DataContext = new EmployeesPageVM(this);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
